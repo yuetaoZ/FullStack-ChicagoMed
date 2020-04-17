@@ -1,6 +1,6 @@
 Create Table appointment (
     appointmentid integer PRIMARY KEY,
-    appointmentdate data,
+    appointmentdate date,
     patientid integer,
     doctorid integer,
     locationid integer
