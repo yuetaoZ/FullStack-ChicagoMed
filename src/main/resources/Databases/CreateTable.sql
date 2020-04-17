@@ -14,7 +14,7 @@ CREATE TABLE patient (
 
 CREATE TABLE patientDOB (
     patientid integer  PRIMARY KEY,
-    dateofbirth data
+    dateofbirth date 
 );
 
 CREATE TABLE patientContact (
