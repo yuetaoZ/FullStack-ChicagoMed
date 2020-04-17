@@ -1,41 +1,41 @@
 Create Table appointment (
-    appointmentId integer PRIMARY KEY,
-    appointmentDate data,
-    patientId integer,
-    doctorId integer,
-    locationId integer
+    appointmentid integer PRIMARY KEY,
+    appointmentdate data,
+    patientid integer,
+    doctorid integer,
+    locationid integer
 );
 
 CREATE TABLE patient (
-    patientId integer  PRIMARY KEY ,
-    patientFirstName varchar (255),
-    patientLastName varchar (255)
+    patientid integer  PRIMARY KEY ,
+    patientfirstname varchar (255),
+    patientlastname varchar (255)
 );
 
 CREATE TABLE patientDOB (
-    patientId integer  PRIMARY KEY,
-    dateOfBirth data
+    patientid integer  PRIMARY KEY,
+    dateofbirth data
 );
 
 CREATE TABLE patientContact (
-    patientId integer PRIMARY KEY,
+    patientid integer PRIMARY KEY,
     email varchar (255),
-    phoneNumber varchar (255),
+    phonenumber varchar (255),
     address varchar (255),
     city varchar (255),
     state varchar (255),
-    zipCode integer
+    zipcode integer
 );
 
 CREATE TABLE location (
-    locationId int PRIMARY KEY,
+    locationid int PRIMARY KEY,
     address varchar (255),
     city varchar (255),
     state varchar (255),
-    zipCode integer
+    zipcode integer
 );
 
 CREATE TABLE locationDoc (
-    locationId integer PRIMARY KEY,
-    doctorId integer 
+    locationid integer PRIMARY KEY,
+    doctorid integer
 );
