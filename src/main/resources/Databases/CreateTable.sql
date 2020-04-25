@@ -42,7 +42,7 @@ CREATE TABLE locationDoc (
 
 CREATE TABLE public.appointment(
     appointmentid int PRIMARY KEY,
-    appointmentdate date,
+    appointmentdatetime timestamp without time zone NOT NULL DEFAULT '2020-04-28 12:00:00'::timestamp without time zone,
     patientid int,
     doctorid int,
     locationid int
