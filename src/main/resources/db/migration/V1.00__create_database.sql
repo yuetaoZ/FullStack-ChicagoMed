@@ -1,11 +1,3 @@
-Create Table appointment (
-    appointmentid integer PRIMARY KEY,
-    appointmentdate date,
-    patientid integer,
-    doctorid integer,
-    locationid integer
-);
-
 CREATE TABLE patient (
     patientid integer  PRIMARY KEY ,
     patientfirstname varchar (255),
@@ -40,14 +32,6 @@ CREATE TABLE locationDoc (
     doctorid integer
 );
 
--- CREATE TABLE appointment(
---     appointmentid int PRIMARY KEY,
---     appointmentdate date,
---     patientid int,
---     doctorid int,
---     locationid int
---     );
-
 CREATE TABLE bill(
     appointmentid integer PRIMARY KEY,
     billid int,
@@ -56,6 +40,14 @@ CREATE TABLE bill(
     duedate date,
 	patientid int,
 	billbalance int
+);
+
+Create Table appointment (
+    appointmentid integer PRIMARY KEY,
+    appointmentdatetime timestamp without time zone NOT NULL DEFAULT '2020-04-28 12:00:00'::timestamp without time zone,
+    patientid integer,
+    doctorid integer,
+    locationid integer
 );
 
 CREATE TABLE doctor(
