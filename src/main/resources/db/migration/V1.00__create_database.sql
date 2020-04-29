@@ -28,7 +28,8 @@ CREATE TABLE location (
 );
 
 CREATE TABLE locationDoc (
-    locationid integer PRIMARY KEY,
+    doclocationid integer PRIMARY KEY,
+    locationid integer,
     doctorid integer
 );
 

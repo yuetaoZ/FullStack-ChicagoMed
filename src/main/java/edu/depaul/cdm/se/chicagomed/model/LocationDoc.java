@@ -15,16 +15,20 @@ public class LocationDoc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long doclocationid;
 
-    @OneToMany(
-            mappedBy = "locationId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @ToString.Exclude
-    private List<Doctor> doctor_Id;
+//    @OneToMany(
+//            mappedBy = "locationId",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+
+//    @ToString.Exclude
+//    private List<Doctor> doctor_Id;
 
     @Column(name = "doctorID")
     private String doctorID;
+
+    @Column(name = "locationID")
+    private String locationID;
 }
