@@ -16,13 +16,14 @@ public class Appointment {
     private static final long serialVersionUID = 10L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToOne
     @Column(unique = true)
-    @Size(max = 5)
-    private String appointmentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long appointmentId;
+
+//    @ManyToOne
+//    @Column(unique = true)
+//    @Size(max = 5)
+//    private String appointmentId;
 
     @Column(name = "appointmentdate")
     private String appointmentDate;
@@ -35,13 +36,13 @@ public class Appointment {
     @ToString.Exclude
     private List<Patient> patient_Id;
 
-    @OneToMany(
-            mappedBy = "doctorId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+//    @OneToMany(
+//            mappedBy = "doctorId",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
     @ToString.Exclude
-    private List<Doctor> doctor_Id;
+    private Doctor doctor_Id;
 
     @OneToMany(
             mappedBy = "locationId",
