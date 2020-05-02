@@ -15,9 +15,9 @@ public class DoctorSpecialization {
 
     private static final long serialVersionUID = 2L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @OneToMany(
             mappedBy = "doctorId",

@@ -17,12 +17,12 @@ public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long patientid;
 
-    @ManyToOne
-    @Column(unique = true)
-    @Size(max = 5)
-    private String patientId;
+//    @ManyToOne
+//    @Column(unique = true)
+//    @Size(max = 5)
+//    private String patientId;
 
     @Column(name = "patientfirstname")
     private String patientFirstName;

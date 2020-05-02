@@ -26,9 +26,19 @@ public class LocationDoc {
 //    @ToString.Exclude
 //    private List<Doctor> doctor_Id;
 
-    @Column(name = "doctorID")
-    private String doctorID;
-
+    @OneToMany(
+            mappedBy = "locationId",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @Column(name = "locationID")
     private String locationID;
+
+    @OneToMany(
+            mappedBy = "doctorId",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Column(name = "doctorID")
+    private String doctorID;
 }

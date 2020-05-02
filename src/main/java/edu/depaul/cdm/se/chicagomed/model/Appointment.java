@@ -17,12 +17,12 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long appointmentid;
 
-    @ManyToOne
-    @Column(unique = true)
-    @Size(max = 5)
-    private String appointmentId;
+//    @ManyToOne
+//    @Column(unique = true)
+//    @Size(max = 5)
+//    private String appointmentId;
 
     @Column(name = "appointmentdate")
     private String appointmentDate;

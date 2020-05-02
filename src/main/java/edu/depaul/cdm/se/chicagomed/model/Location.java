@@ -17,12 +17,12 @@ public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long locationid;
 
-    @ManyToOne
-    @Column(unique = true)
-    @Size(max = 5)
-    private String locationId;
+//    @ManyToOne
+//    @Column(unique = true)
+//    @Size(max = 5)
+//    private String locationId;
 
     @Column(name = "address")
     private String address;

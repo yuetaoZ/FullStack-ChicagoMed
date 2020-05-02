@@ -13,9 +13,9 @@ import java.util.List;
 public class DoctorContact {
     private static final long serialVersionUID = 3L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long doctorid;
 
     @OneToMany(
             mappedBy = "doctorId",

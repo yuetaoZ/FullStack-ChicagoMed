@@ -18,12 +18,12 @@ public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long billid;
 
-    @ManyToOne
-    @Column(unique = true)
-    @Size(max = 5)
-    private String billId;
+//    @ManyToOne
+//    @Column(unique = true)
+//    @Size(max = 5)
+//    private String billId;
 
     @Column(name = "billamt")
     private double billAmount;

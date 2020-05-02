@@ -13,10 +13,10 @@ import java.util.List;
 public class PatientContact {
     private static final long serialVersionUID = 3L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
+//
     @OneToMany(
             mappedBy = "patientId",
             cascade = CascadeType.ALL,
