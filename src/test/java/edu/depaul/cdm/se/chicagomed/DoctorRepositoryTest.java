@@ -3,11 +3,11 @@ package edu.depaul.cdm.se.chicagomed;
 import edu.depaul.cdm.se.chicagomed.model.Doctor;
 import edu.depaul.cdm.se.chicagomed.repository.DoctorRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class DoctorRepositoryTest {
@@ -20,35 +20,38 @@ public class DoctorRepositoryTest {
     @Test
     public void testAdd() {
         // given
-        final String DOCTOR_ID = "001";
         Doctor doctorTom = new Doctor();
-        doctorTom.setDoctorId(DOCTOR_ID);
+        Long doctorID = doctorTom.getDoctorid();
         doctorTom.setDoctorFirstName("Tom");
         doctorTom.setDoctorLastName("Cat");
         entityManager.persist(doctorTom);
         entityManager.flush();
 
         // when
-        Doctor found = repository.findByDoctorId(DOCTOR_ID).get(0);
+        Optional<Doctor> found = repository.findById(doctorID);
 
         // then
-        assertEquals(found.getDoctorId(), doctorTom.getDoctorId());
+        assertEquals(found.get().getDoctorFirstName(), doctorTom.getDoctorFirstName());
     }
 
     @Test
     public void testUpdate() {
         // given
-        final String ORIGINAL_DOCTOR = "0014";
-        final String NEW_DOCTOR_ID = "0015";
+        Doctor randomDoctor = new Doctor();
+        entityManager.persist(randomDoctor);
+        entityManager.flush();
+        final Long ORIGINAL_DOCTOR = randomDoctor.getDoctorid();
+        final Long NEW_DOCTOR_ID = 15L;
+
 
         // when
-        Doctor found = repository.findByDoctorId(ORIGINAL_DOCTOR).get(0);
-        found.setDoctorId("0015");
+        Doctor found = repository.findById(ORIGINAL_DOCTOR).get();
+        found.setDoctorid(NEW_DOCTOR_ID);
         entityManager.persistAndFlush(found);
 
         // Should not find any doctor from original doctorID and find one in the new doctorID
-        assertEquals(0, repository.findByDoctorId(ORIGINAL_DOCTOR).size());
-        assertEquals(1, repository.findByDoctorId(NEW_DOCTOR_ID).size());
+        assertTrue(repository.findById(ORIGINAL_DOCTOR).isEmpty());
+        assertFalse(repository.findById(NEW_DOCTOR_ID).isEmpty());
     }
 
 }
