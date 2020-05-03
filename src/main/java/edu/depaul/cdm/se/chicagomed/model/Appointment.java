@@ -19,35 +19,31 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long appointmentid;
 
-//    @ManyToOne
-//    @Column(unique = true)
-//    @Size(max = 5)
-//    private String appointmentId;
-
     @Column(name = "appointmentdate")
     private String appointmentDate;
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "patientId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @ToString.Exclude
-    private List<Patient> patient_Id;
+    private Patient patient_Id;
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "doctorId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @ToString.Exclude
-    private List<Doctor> doctor_Id;
+    private Doctor doctor_Id;
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "locationId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @ToString.Exclude
-    private List<Location> location_Id;
+    private Location location_Id;
+
 }
