@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,17 +12,17 @@ import java.util.List;
 public class DoctorContact {
     private static final long serialVersionUID = 3L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long doctorid;
+    @Id
+    @Column(name = "doctorid")
+    private long doctorId;
 
-    @OneToMany(
-            mappedBy = "doctorId",
+    @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JoinColumn(name = "doctorid", nullable = false)
     @ToString.Exclude
-    private List<Doctor> doctor_Id;
+    private Doctor doctor;
 
     @Column(name = "doctoremail")
     private String doctoremail;

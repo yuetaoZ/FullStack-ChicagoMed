@@ -4,8 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.List;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -15,18 +14,18 @@ public class PatientDOB {
 
     private static final long serialVersionUID = 2L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
+    @Id
+    @Column(name = "patientid")
+    private long patientId;
 
-    @OneToMany(
-            mappedBy = "patientId",
+    @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JoinColumn(name = "patientid", nullable = false)
     @ToString.Exclude
-    private List<Patient> patient_Id;
+    private Patient patient;
 
     @Column(name = "dateofbirth")
-    private String patient_DOB;
+    private Date patientDOB;
 }

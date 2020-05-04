@@ -14,31 +14,29 @@ public class LocationDoc {
     private static final long serialVersionUID = 3L;
 
     @Id
+    @Column(name = "doclocationId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long doclocationid;
+    private long doclocationId;
 
-//    @OneToMany(
-//            mappedBy = "locationId",
+    @Column(name = "doctorid")
+    private long doctorid;
+
+    @Column(name = "locationid")
+    private long locationId;
+
+    @OneToMany(
+            mappedBy = "locationid",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @ToString.Exclude
+    private List<Location> locations;
+
+//    @OneToOne(
 //            cascade = CascadeType.ALL,
 //            fetch = FetchType.LAZY
 //    )
-
+//    @JoinColumn(name = "doctorid", nullable = false)
 //    @ToString.Exclude
-//    private List<Doctor> doctor_Id;
-
-    @OneToMany(
-            mappedBy = "locationId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @Column(name = "locationID")
-    private String locationID;
-
-    @OneToMany(
-            mappedBy = "doctorId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @Column(name = "doctorID")
-    private String doctorID;
+//    private Doctor doctor;
 }

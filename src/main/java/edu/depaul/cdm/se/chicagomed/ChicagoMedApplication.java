@@ -1,21 +1,16 @@
 package edu.depaul.cdm.se.chicagomed;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import edu.depaul.cdm.se.chicagomed.model.ApptNotes;
-import edu.depaul.cdm.se.chicagomed.model.DoctorReview;
-import edu.depaul.cdm.se.chicagomed.model.DoctorSchedule;
-import edu.depaul.cdm.se.chicagomed.model.PatientMedHistory;
-import edu.depaul.cdm.se.chicagomed.repository.ApptNotesRepository;
-import edu.depaul.cdm.se.chicagomed.repository.DoctorReviewRepository;
-import edu.depaul.cdm.se.chicagomed.repository.DoctorScheduleRepository;
-import edu.depaul.cdm.se.chicagomed.repository.PatientMedHistoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.depaul.cdm.se.chicagomed.model.*;
+import edu.depaul.cdm.se.chicagomed.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.Optional;
 
 @SpringBootApplication
 public class ChicagoMedApplication {
@@ -25,14 +20,20 @@ public class ChicagoMedApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(PatientMedHistoryRepository repo) {
+	public CommandLineRunner demo(PatientRepository repo, PatientContactRepository patientContactRepository) {
 		return (args) -> {
-			PatientMedHistory patient = new PatientMedHistory();
-			patient.setPatientId(1);
-			ObjectNode history = JsonNodeFactory.instance.objectNode();
-			history.put("firstVisit", "March 1 2020");
-			patient.setMedicalHistory(history);
-			repo.save(patient);
+			Patient patient = new Patient();
+			patient.setPatientFirstName("test");
+			patient.setPatientLastName("test");
+			patient = repo.save(patient);
+
+			PatientContact patientContact = new PatientContact();
+			patientContact.setPatient(patient);
+			patientContact.setPatientId(patient.getPatientId());
+			patientContactRepository.save(patientContact);
+
+			Optional<PatientContact> patientContact1 = patientContactRepository.findById(patient.getPatientId());
+			patientContact.getAddress();
 		};
 	}
 

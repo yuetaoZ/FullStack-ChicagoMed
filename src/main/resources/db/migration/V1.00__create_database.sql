@@ -1,5 +1,5 @@
 CREATE TABLE patient (
-    patientid integer  PRIMARY KEY ,
+    patientid SERIAL,
     patientfirstname varchar (255),
     patientlastname varchar (255)
 );
@@ -20,7 +20,7 @@ CREATE TABLE patientContact (
 );
 
 CREATE TABLE location (
-    locationid int PRIMARY KEY,
+    locationi SERIAL,
     address varchar (255),
     city varchar (255),
     state varchar (255),
@@ -34,8 +34,8 @@ CREATE TABLE locationDoc (
 );
 
 CREATE TABLE bill(
-    appointmentid integer PRIMARY KEY,
-    billid int,
+    appointmentid integer,
+    billid SERIAL,
     billamt int,
     paidamt int,
     duedate date,
@@ -44,7 +44,7 @@ CREATE TABLE bill(
 );
 
 Create Table appointment (
-    appointmentid integer PRIMARY KEY,
+    appointmentid SERIAL,
     appointmentdatetime timestamp without time zone NOT NULL DEFAULT '2020-04-28 12:00:00'::timestamp without time zone,
     patientid integer,
     doctorid integer,
@@ -52,7 +52,7 @@ Create Table appointment (
 );
 
 CREATE TABLE doctor(
-    doctorid int PRIMARY KEY,
+    doctorid SERIAL,
     doctorfirstname varchar(255),
     doctorlastname varchar(255)
 );

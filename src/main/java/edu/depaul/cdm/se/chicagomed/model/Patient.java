@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
@@ -16,13 +15,9 @@ public class Patient implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "patientid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long patientid;
-
-//    @ManyToOne
-//    @Column(unique = true)
-//    @Size(max = 5)
-//    private String patientId;
+    private long patientId;
 
     @Column(name = "patientfirstname")
     private String patientFirstName;

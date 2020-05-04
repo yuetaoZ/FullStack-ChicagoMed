@@ -17,13 +17,9 @@ public class Bill {
     private static final long serialVersionUID = 11L;
 
     @Id
+    @Column(name = "billid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long billid;
-
-//    @ManyToOne
-//    @Column(unique = true)
-//    @Size(max = 5)
-//    private String billId;
+    private long billId;
 
     @Column(name = "billamt")
     private double billAmount;
@@ -38,19 +34,16 @@ public class Bill {
     private double billBalance;
 
 
-    @OneToMany(
-            mappedBy = "patientId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne
+    @JoinColumn(name = "patientid", nullable = false)
     @ToString.Exclude
-    private List<Patient> patient_Id;
+    private Patient patient;
 
-    @OneToMany(
-            mappedBy = "appointmentId",
+    @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JoinColumn(name = "appointmentid", nullable = false)
     @ToString.Exclude
-    private List<Appointment> appointment_ID;
+    private Appointment appointment;
 }

@@ -16,13 +16,9 @@ public class Doctor implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "doctorid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long doctorid;
-
-//    @ManyToOne
-//    @Column(unique = true)
-//    @Size(max = 5)
-//    private String doctorId;
+    private long doctorId;
 
     @Column(name = "doctorfirstname")
     private String doctorFirstName;

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface AppoinmentRepository extends CrudRepository<Appointment, String> {
+public interface AppoinmentRepository extends CrudRepository<Appointment, Long> {
     List<Appointment> findByAppointmentDate(String AppDate);
 
     @Override

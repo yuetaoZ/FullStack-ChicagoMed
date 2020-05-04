@@ -15,17 +15,17 @@ public class DoctorSpecialization {
 
     private static final long serialVersionUID = 2L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
+    @Id
+    @Column(name = "doctorid")
+    private long doctorId;
 
-    @OneToMany(
-            mappedBy = "doctorId",
+    @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JoinColumn(name = "doctorid", nullable = false)
     @ToString.Exclude
-    private List<Doctor> doctor_ID;
+    private Doctor doctor;
 
     @Column(name = "specialization")
     private String doctor_Specialization;

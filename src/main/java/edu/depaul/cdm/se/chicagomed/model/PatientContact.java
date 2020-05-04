@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,17 +12,17 @@ import java.util.List;
 public class PatientContact {
     private static final long serialVersionUID = 3L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
-//
-    @OneToMany(
-            mappedBy = "patientId",
+    @Id
+    @Column(name = "patientid")
+    private long patientId;
+
+    @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JoinColumn(name = "patientid", nullable = false)
     @ToString.Exclude
-    private List<Patient> patient_Id;
+    private Patient patient;
 
     @Column(name = "email")
     private String email;
@@ -41,6 +40,6 @@ public class PatientContact {
     private String state;
 
     @Column(name = "zipcode")
-    private String zipcode;
+    private long zipcode;
 
 }
