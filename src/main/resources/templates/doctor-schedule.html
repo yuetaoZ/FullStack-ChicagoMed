@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/doctor-header :: common-header">
+    </head>
+    <body>
+
+<div th:replace="fragments/doctor-header :: header"></div>
+
+<div>
+
+    <div>
+        <h1>Editing weekly schedule for Dr. Smith</h1>
+    </div>
+
+    <div class="doctor-schedule-table">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Monday</td>
+                    <td>8am</td>
+                    <td>5pm</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>8am</td>
+                    <td>5pm</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>8am</td>
+                    <td>5pm</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>8am</td>
+                    <td>5pm</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>off</td>
+                    <td>off</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<!--    <div th:replace="fragments/footer :: footer"></div>-->
+</body>
+</html>

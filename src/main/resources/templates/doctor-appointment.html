@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/doctor-header :: common-header">
+    </head>
+    <body>
+<div th:replace="fragments/doctor-header :: header"></div>
+<div>
+    <a href="/doctor-appointments"> <- Back to Patient List</a>
+</div>
+<div class="doctor-appointment-view">
+    <div class="jumbotron">
+        <h1 class="display-4">Appointment Notes for Sally Jones</h1>
+    </div>
+
+    <div>
+        <h2>Patient Medical History</h2>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam diam.
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <h2>Enter appointments notes here:</h2>
+        <textarea></textarea>
+        <button>Save</button>
+    </div>
+
+</div>
+
+
+
+
+<!--    <div th:replace="fragments/footer :: footer"></div>-->
+</body>
+</html>

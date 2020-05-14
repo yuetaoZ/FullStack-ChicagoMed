@@ -1,0 +1,19 @@
+.doctor-patient-table {
+    width: 50%;
+    padding: 25px;
+}
+
+.doctor-schedule-table {
+    width: 50%;
+    padding: 25px;
+}
+
+#doctor-patient-view-label {
+    padding: 25px;
+}
+
+.doctor-appointment-view {
+    width: 50%;
+    height: 100%;
+    padding: 25px;
+}
