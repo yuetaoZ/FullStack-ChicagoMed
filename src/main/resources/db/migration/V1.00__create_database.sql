@@ -20,7 +20,7 @@ CREATE TABLE patientContact (
 );
 
 CREATE TABLE location (
-    locationi SERIAL,
+    locationid SERIAL,
     address varchar (255),
     city varchar (255),
     state varchar (255),
