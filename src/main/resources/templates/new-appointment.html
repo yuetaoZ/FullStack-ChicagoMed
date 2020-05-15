@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/patient-header :: common-header">
+    </head>
+
+<body>
+<div th:replace="fragments/patient-header :: header"></div>
+
+    <div id="doctor-patient-view-label">
+        <h1>Schedule a New Appointment!</h1>
+    </div>
+    <br/>
+    <br/>
+
+    <div>
+    <p style="text-align:left;">
+        &ensp; Please complete the following information:
+        <br/>
+        <br/>
+        &ensp; First Name: <input id="patientfirstname" type = "text">
+        <br/>
+        <br/>
+        &ensp; Last Name: <input id="patientlastname" type = "text">
+        <br/>
+        <br/>
+        &ensp; Date of Birth: <input id="dateofbirth" type = "date">
+        <br/>
+        <br/>
+        &ensp; Location:
+        <select id="locations">
+            <option value="northwestern">Northwestern Hospital</option>
+            <option value="rush">Rush Medical Center</option>
+            <option value="cpc">Chicago Primary Care</option>
+        </select>
+        <br/>
+        <br/>
+        &ensp; Appointment Type (Specialty):
+        <select id="specialization">
+            <option value="PC">Primary Care</option>
+            <option value="Ortho">Orthopaedics</option>
+            <option value="Surgery">Surgery</option>
+        </select>
+        <br/>
+        <br/>
+        &ensp; Doctor:
+        <select id="doctor">
+            <option value="johnsmith">Dr. John Smith</option>
+            <option value="stevenjones">Dr. Steven Jones</option>
+            <option value="amywhite">Dr. Amy White</option>
+        </select>
+        <br/>
+        <br/>
+        &ensp; Appointment Date and Time: <input id="apptdate" type = "datetime-local">
+        <br/>
+        <br/>
+        &ensp; <input type = submit>
+    <p/>
+    </div>
+
+</body>
+
+</html>
