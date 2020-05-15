@@ -6,32 +6,36 @@
     <body>
 <div th:replace="fragments/doctor-header :: header"></div>
 
+
+<div class="content">
     <div id="doctor-patient-view-label">
         <h1>Upcoming Appointments for Dr. Smith</h1>
     </div>
 
     <div class="doctor-patient-table">
         <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>Patient Name</th>
-                <th>Appointment Date</th>
-                <th></th>
-            </tr>
-            </thead>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th></th>
+                </tr>
+                </thead>
 
-            <tr>
-                <td>Ada Lovelace</td>
-                <td>December 10, 2019</td>
-                <td><a href="/doctor-appointment">View Patient Details</a></td>
-            </tr>
-        </table>
+                <tr>
+                    <td>Ada Lovelace</td>
+                    <td>December 10, 2019</td>
+                    <td><a href="/doctor-appointment">View Patient Details</a></td>
+                </tr>
+            </table>
         </div>
     </div>
+</div>
 
 
 
-<!--    <div th:replace="fragments/footer :: footer"></div>-->
+
+    <div th:replace="fragments/app-footer :: footer"></div>
 </body>
 </html>
