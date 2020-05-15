@@ -3,7 +3,7 @@
 <head>
     <head th:replace="fragments/doctor-header :: common-header">
     </head>
-    <body>
+<body>
 
 <div th:replace="fragments/doctor-header :: header"></div>
 
@@ -12,6 +12,7 @@
     <div>
         <h1>Editing weekly schedule for Dr. Smith</h1>
     </div>
+
 
     <div class="doctor-schedule-table">
         <div class="table-responsive">
@@ -23,40 +24,100 @@
                     <th>End Time</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td>Monday</td>
-                    <td>8am</td>
-                    <td>5pm</td>
-                </tr>
-                <tr>
-                    <td>Tuesday</td>
-                    <td>8am</td>
-                    <td>5pm</td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
-                    <td>8am</td>
-                    <td>5pm</td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
-                    <td>8am</td>
-                    <td>5pm</td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
-                    <td>off</td>
-                    <td>off</td>
-                </tr>
+                <tbody id="tableBody">
+
+                </tbody>
+<!--                <tr>-->
+<!--                    <td>Monday</td>-->
+<!--                    <td>-->
+<!--                        <select>-->
+<!--                            <option value="8">8am</option>-->
+<!--                            <option value="9">9am</option>-->
+<!--                            <option value="10">10am</option>-->
+<!--                        </select>-->
+<!--                    </td>-->
+
+<!--                    <td>5pm</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Tuesday</td>-->
+<!--                    <td>8am</td>-->
+<!--                    <td>5pm</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Wednesday</td>-->
+<!--                    <td>8am</td>-->
+<!--                    <td>5pm</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Thursday</td>-->
+<!--                    <td>8am</td>-->
+<!--                    <td>5pm</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Friday</td>-->
+<!--                    <td>off</td>-->
+<!--                    <td>off</td>-->
+<!--                </tr>-->
             </table>
         </div>
     </div>
 
-
+    <div>
+        <button type="button" class="btn btn-primary">Save</button>
+    </div>
 </div>
+<script>
+    var days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+    ];
+    var startHours = "                <select>\n" +
+        "                            <option selected=\"selected\" value=\"8\">8am</option>\n" +
+        "                            <option value=\"9\">9am</option>\n" +
+        "                            <option value=\"10\">10am</option>\n" +
+        "                            <option value=\"11\">11am</option>\n" +
+        "                            <option value=\"12\">12pm</option>\n" +
+        "                            <option value=\"13\">1pm</option>\n" +
+        "                            <option value=\"14\">2pm</option>\n" +
+        "                            <option value=\"15\">3pm</option>\n" +
+        "                            <option value=\"16\">4pm</option>\n" +
+        "                            <option value=\"17\">5pm</option>\n" +
+            "<hr>" +
+        "                            <option value=\"0\">OFF</option>\n" +
+        "                        </select>";
+    var endHours = "                <select>\n" +
+        "                            <option value=\"8\">8am</option>\n" +
+        "                            <option value=\"9\">9am</option>\n" +
+        "                            <option value=\"10\">10am</option>\n" +
+        "                            <option value=\"11\">11am</option>\n" +
+        "                            <option value=\"12\">12pm</option>\n" +
+        "                            <option value=\"13\">1pm</option>\n" +
+        "                            <option value=\"14\">2pm</option>\n" +
+        "                            <option value=\"15\">3pm</option>\n" +
+        "                            <option value=\"16\">4pm</option>\n" +
+        "                            <option selected=\"selected\" value=\"17\">5pm</option>\n" +
+        "<hr>" +
+        "                            <option value=\"0\">OFF</option>\n" +
+        "                        </select>";
 
 
+    var table = "";
+    days.forEach(day => {
+        table += "             <tr>\n" +
+            "                    <td>" + day + "</td>\n" +
+            "                    <td>" + startHours + "</td>\n" +
+            "                    <td>" + endHours + "</td>\n"
+            "                </tr>"
+    })
 
+
+    document.getElementById("tableBody").innerHTML = table;
+
+</script>
 
 <div th:replace="fragments/app-footer :: footer"></div>
 </body>
