@@ -7,8 +7,59 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/app.css">
             <title>Chicago Med</title>
+        <style>
+            body {
+                font-family: Arial;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            form.admin-portal-search-container {
+                display: inline-block;
+                width: 40%;
+                vertical-align: middle;
+            }
+
+            form.admin-portal-search-container input[type=text] {
+                position:relative;
+                left:10%;
+                padding: 10px;
+                font-size: 17px;
+                border: 1px solid grey;
+                float: left;
+                width: 66%;
+                background: #f1f1f1;
+            }
+
+            form.admin-portal-search-container button {
+                position:relative;
+                left:10%;
+                float: left;
+                width: 10%;
+                padding: 10px;
+                background: #2196F3;
+                color: white;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none;
+                cursor: pointer;
+            }
+
+            form.admin-portal-search-container button:hover {
+                background: #0b7dda;
+            }
+
+            form.admin-portal-search-container::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+        </style>
     </head>
     <body>
         <div th:fragment="header" class="header">
