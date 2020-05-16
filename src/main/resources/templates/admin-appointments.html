@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/admin-header :: common-header">
+    </head>
+<body>
+<div th:replace="fragments/admin-header :: header"></div>
+
+
+<div class="content">
+    <div id="admin-doctor-patient-view-label">
+        <h1>Search for Patients/Doctors</h1>
+    </div>
+
+    <form class="admin-portal-search-container" action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <div class="admin-doctor-patient-table">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Date of Birth</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tr>
+                    <td>Ada Lovelace</td>
+                    <td>December 10, 1815</td>
+                    <td><a href="/admin-appointment">View Patient Details</a></td>
+                </tr>
+                <tr>
+                    <td>Grace Hopper</td>
+                    <td>December 9, 1906</td>
+                    <td><a href="/admin-appointment">View Patient Details</a></td>
+                </tr>
+                <tr>
+                    <td>Marge Hamilton</td>
+                    <td>August 17, 1936</td>
+                    <td><a href="/admin-appointment">View Patient Details</a></td>
+                </tr>
+                <tr>
+                    <td>John Clark</td>
+                    <td>June 24, 1917</td>
+                    <td><a href="/admin-appointment">View Patient Details</a></td>
+                </tr>
+                <tr>
+                    <td>Bill Simpson</td>
+                    <td>March 14, 1940</td>
+                    <td><a href="/admin-appointment">View Patient Details</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:replace="fragments/app-footer :: footer"></div>
+</body>
+</html>
