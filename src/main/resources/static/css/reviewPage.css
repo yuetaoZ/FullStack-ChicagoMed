@@ -1,0 +1,32 @@
+.top{
+    text-align: center;
+}
+.top > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+#pic{
+    width: 400px;
+    height: auto;
+}
+#score{
+    top: 0;
+    left: 0%;
+    padding: 5px;
+}
+#score .checked{
+    color: orange;
+}
+.review {
+    text-align: center;
+}
+#comment{
+    width: 1000px;
+    height: 300px;
+}
+#submit {
+    right: 300px;
+    position: absolute;
+    font-size: 16px;
+    padding: 15px 32px;
+}
