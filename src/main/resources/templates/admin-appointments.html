@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <head th:replace="fragments/admin-header :: common-header">
-    </head>
+
+<head th:replace="fragments/admin-header :: common-header">
+</head>
 <body>
 <div th:replace="fragments/admin-header :: header"></div>
 
@@ -13,7 +13,7 @@
     </div>
 
     <form class="admin-portal-search-container" action="/action_page.php">
-        <input type="text" placeholder="Search.." name="search">
+        <input type="text" placeholder="Search for patients/doctors..." name="search" style="margin:auto;">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
