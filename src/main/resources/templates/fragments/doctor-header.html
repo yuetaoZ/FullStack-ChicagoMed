@@ -14,13 +14,16 @@
         <div th:fragment="header" class="header">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <div class="navbar-header" style="width: 33%; text-align: center;">
+                    <div style="width: 25%; text-align: center;"  >
+                        <button type="button" class="btn btn-secondary" onclick="location.href = 'home';">Logout</button>
+                    </div>
+                    <div class="navbar-header" style="width: 25%; text-align: center;">
                         <h2>Chicago Med Application</h2>
                     </div>
-                    <div style="width:33%; text-align: center;">
+                    <div style="width:25%; text-align: center;">
                         <h2>Doctor Portal</h2>
                     </div>
-                    <div style="width: 33%; text-align: center;">
+                    <div style="width: 25%; text-align: center;">
                         <ul class="nav navbar-nav">
                             <li><h3><a href="/doctor-appointments">View your appointments</a></h3></li>
                             <li><h3><a href="/doctor-schedule">Set your schedule</a></h3></li>
