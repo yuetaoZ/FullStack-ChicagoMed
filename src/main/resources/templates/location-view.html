@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/patient-header :: common-header">
+        <link rel="stylesheet" href="../static/css/viewPages.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="top">
+
+        <div class="pic_review">
+            <img src="../static/images/placeholder.jpg" height="270" width="300"/>
+            <div id="score">
+                <h3>Location</h3>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
+        </div>
+
+        <div class="contactInfo">
+            <h2>Contact: </h2>
+            <ul>
+                <li><h4>123 E. Willow st Concord, IL 70017</h4></li>
+                <li><h4>(555)-555-555</h4></li>
+                <li><h4>aHospital@hospital.com</h4></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="reviews">
+        <div id="reviewText">
+            <h2 >Reviews: </h2>
+            <h2 style="text-align: right"><a href="review-page.html">Leave a Review</a> </h2>
+        </div>
+
+
+        <div id="box">
+            <div id="container">
+                <h3>The people here are very nice.</h3>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            </div>
+
+            <div id="container">
+                <h3>This hospital is really dirty!</h3>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+</html>

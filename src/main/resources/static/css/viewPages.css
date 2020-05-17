@@ -1,0 +1,47 @@
+.top{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+}
+
+.pic_review{
+    padding: 5px;
+    /*border: 1px solid blue;*/
+    /*background-color: yellow;*/
+}
+.checked{
+    color: orange;
+}
+.contactInfo{
+    padding: 5px;
+    /*border: 1px solid red;*/
+    /*background-color: green;*/
+}
+.reviews{
+    padding: 5px;
+    /*border: 1px solid red;*/
+    /*background-color: red;*/
+    height: 350px;
+
+}
+#reviewText {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+    padding: 5px;
+    /*border: 5px solid yellow;*/
+}
+#box{
+    padding: 5px;
+    /*border: 5px solid purple;*/
+    height: auto;
+}
+#container{
+    border: 2px solid #ccc;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 16px;
+}
+#container .checked{
+    color: orange;
+}

@@ -16,6 +16,9 @@ public class PatientController {
         return "new-appointment";
     }
 
+    @GetMapping("/location-view")
+    public String getLocationview(Model model){return "location-view";}
+
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {
 //        return "doctor-schedule";
