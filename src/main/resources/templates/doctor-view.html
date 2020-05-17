@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <head th:replace="fragments/patient-header :: common-header">
-        <link rel="stylesheet" href="../static/css/viewPages.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/viewPages.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
 <body>
+<div th:replace="fragments/patient-header :: header"></div>
 <div class="top">
-
     <div class="pic_review">
-        <img src="../static/images/placeholder.jpg" height="270" width="300"/>
+        <img src="images/placeholder.jpg" height="270" width="300"/>
         <div id="score">
             <h3 style="display: inline; padding: 20px">Dr. Jane Smith</h3>
             <span class="fa fa-star checked"></span>
@@ -36,7 +37,7 @@
 <div class="reviews">
     <div id="reviewText">
         <h2 >Reviews: </h2>
-        <h2 style="text-align: right"><a href="review-page.html">Leave a Review</a> </h2>
+        <h2 style="text-align: right"><a href="/review-page">Leave a Review</a> </h2>
     </div>
 
 

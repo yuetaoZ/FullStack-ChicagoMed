@@ -19,6 +19,12 @@ public class PatientController {
     @GetMapping("/location-view")
     public String getLocationview(Model model){return "location-view";}
 
+    @GetMapping("/doctor-view")
+    public String getDoctorview(Model model){return "doctor-view";}
+
+    @GetMapping("/review-page")
+    public String getReview(Model model){return "review-page";}
+
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {
 //        return "doctor-schedule";
