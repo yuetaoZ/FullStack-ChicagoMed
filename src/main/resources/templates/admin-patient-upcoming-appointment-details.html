@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments/admin-header :: common-header">
+    </head>
+    <body>
+<div th:replace="fragments/admin-header :: header"></div>
+
+<div class="admin-patient-upcoming-appointment-details-view">
+    <div>
+        <h1>Upcoming Appointments</h1>
+    </div>
+
+    <div>
+        <a href="/admin-patient-upcoming-appointments"> <- Back to Appointment List</a>
+    </div>
+
+    <div class="admin-patientInfo-table">
+        <table class="table table-striped table-bordered" style="text-align:left">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Patient Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>001</td>
+                <td>Ada Lovelace</td>
+                <td>12/10/1815</td>
+                <td>Female</td>
+            </tr>
+        </table>
+
+        <table class="table table-striped table-bordered" style="text-align:left">
+            <thead>
+                <tr>
+                    <th colspan="2">Appointment Details</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>Appointment ID</td>
+                <td>007</td>
+            </tr>
+
+            <tr>
+                <td>Date:</td>
+                <td>05/30/2020</td>
+            </tr>
+
+            <tr>
+                <td>Doctor:</td>
+                <td>Dr. Smith</td>
+            </tr>
+
+            <tr>
+                <td>Location:</td>
+                <td>123 E. Willow st Concord, IL 70017</td>
+            </tr>
+        </table>
+
+        <table class="table table-striped table-bordered" style="text-align:left">
+            <thead>
+                <tr>
+                    <th>Appointment Notes:</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>Add some Notes...</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/app-footer :: footer"></div>
+</body>
+</html>
