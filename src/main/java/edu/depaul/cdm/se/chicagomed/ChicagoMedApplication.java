@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se.chicagomed;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.depaul.cdm.se.chicagomed.model.*;
@@ -10,14 +11,47 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 @SpringBootApplication
 public class ChicagoMedApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ChicagoMedApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ChicagoMedApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner addPatientMedHistory(PatientMedHistoryRepository patientMedHistoryRepository) {
+        return (args) -> {
+        	patientMedHistoryRepository.deleteById(12345L);
+			patientMedHistoryRepository.deleteById(12346L);
+			patientMedHistoryRepository.deleteById(12347L);
+			patientMedHistoryRepository.deleteById(12348L);
+            PatientMedHistory patientMedHistory1 = new PatientMedHistory();
+            patientMedHistory1.setPatientId(12345);
+            patientMedHistory1.setMedicalHistory(JsonNodeFactory.instance.textNode("I have bad seasonal allergies. I broke my thumb on my left hand.").textValue());
+
+			PatientMedHistory patientMedHistory2 = new PatientMedHistory();
+			patientMedHistory2.setPatientId(12346);
+			patientMedHistory2.setMedicalHistory(JsonNodeFactory.instance.textNode("I have bad peanut allergies. I have not had any surgeries").textValue());
+
+			PatientMedHistory patientMedHistory3 = new PatientMedHistory();
+			patientMedHistory3.setPatientId(12347);
+			patientMedHistory3.setMedicalHistory(JsonNodeFactory.instance.textNode("I have been generally healthy.").textValue());
+
+			PatientMedHistory patientMedHistory4 = new PatientMedHistory();
+			patientMedHistory4.setPatientId(12348);
+			patientMedHistory4.setMedicalHistory(JsonNodeFactory.instance.textNode("I have been generally unhealthy.").textValue());
+
+			patientMedHistoryRepository.save(patientMedHistory1);
+			patientMedHistoryRepository.save(patientMedHistory2);
+			patientMedHistoryRepository.save(patientMedHistory3);
+			patientMedHistoryRepository.save(patientMedHistory4);
+        };
+    }
+
 //
 //	@Bean
 //	public CommandLineRunner demo(PatientRepository repo, PatientContactRepository patientContactRepository) {

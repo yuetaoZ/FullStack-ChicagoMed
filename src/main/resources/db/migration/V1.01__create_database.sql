@@ -13,5 +13,5 @@ insert into patientdob (patientid, dateofbirth) values (12346, '1983-12-12');
 insert into patientdob (patientid, dateofbirth) values (12347, '1986-04-19');
 insert into patientdob (patientid, dateofbirth) values (12348, '1972-10-15');
 
-insert into location (locationid, locationname, address, city, state, zipcode) values (56789, 'Northwestern Hospital', '251 E Huron St', 'Chicago', 'Illinois', 60611);
+insert into location (locationid, locationname, address, city, state, zipcode) values (56788, 'Northwestern Hospital', '251 E Huron St', 'Chicago', 'Illinois', 60611);
 insert into location (locationid, locationname, address, city, state, zipcode) values (56789, 'Chicago Primary Care', '200 N Michigan Ave', 'Chicago', 'Illinois', 60601);

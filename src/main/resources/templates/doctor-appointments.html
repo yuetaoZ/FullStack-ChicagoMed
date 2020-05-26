@@ -3,7 +3,7 @@
 <head>
     <head th:replace="fragments/doctor-header :: common-header">
     </head>
-    <body>
+<body>
 <div th:replace="fragments/doctor-header :: header"></div>
 
 
@@ -11,51 +11,35 @@
     <div id="doctor-patient-view-label">
         <h1>Upcoming Appointments for Dr. Smith</h1>
     </div>
-
     <div class="doctor-patient-table">
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Patient Name</th>
+                    <th>Patient Last Name</th>
+                    <th>Patient First Name</th>
                     <th>Appointment Date</th>
                     <th></th>
                 </tr>
                 </thead>
-
-                <tr>
-                    <td>Ada Lovelace</td>
-                    <td>December 10, 2019</td>
-                    <td><a href="/doctor-appointment">View Patient Details</a></td>
+                <tbody>
+                <tr th:if="${appts.empty}">
+                    <td colspan="2"> No Appointments Available </td>
                 </tr>
-                <tr>
-                    <td>Grace Hopper</td>
-                    <td>March 10, 2020</td>
-                    <td><a href="/doctor-appointment">View Patient Details</a></td>
+                <tr th:each="appt : ${appts}">
+                    <td span th:text="${appt.patient.patientLastName}"></td>
+                    <td span th:text="${appt.patient.patientFirstName}"></td>
+                    <td span th:text="${appt.appointmentDate}"></td>
+                    <td><a th:href="@{/doctor-appointment(apptId=${appt.appointmentId})}">View Patient Details</a></td>
                 </tr>
-                <tr>
-                    <td>Marge Hamilton</td>
-                    <td>November 5, 2019</td>
-                    <td><a href="/doctor-appointment">View Patient Details</a></td>
                 </tr>
-                <tr>
-                    <td>John Clark</td>
-                    <td>December 2, 2019</td>
-                    <td><a href="/doctor-appointment">View Patient Details</a></td>
-                </tr>
-                <tr>
-                    <td>Bill Simpson</td>
-                    <td>January 10, 2019</td>
-                    <td><a href="/doctor-appointment">View Patient Details</a></td>
-                </tr>
+                </tbody>
             </table>
         </div>
     </div>
 </div>
 
 
-
-
-    <div th:replace="fragments/app-footer :: footer"></div>
+<div th:replace="fragments/app-footer :: footer"></div>
 </body>
 </html>

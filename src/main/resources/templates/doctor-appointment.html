@@ -10,14 +10,13 @@
 </div>
 <div class="doctor-appointment-view">
     <div>
-        <h1>Appointment Notes for Sally Jones</h1>
+        <h1>Appointment Notes for <span th:text="${patient.patientFirstName}"></span> <span th:text="${patient.patientLastName}"></span></h1>
     </div>
 
     <div style="padding: 25px;">
         <h2>Patient Medical History</h2>
         <div style="width: 45%; height:33%;  margin: auto; padding: 50px;">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam diam.
+            <p th:text="${patientMedHistory}">
             </p>
         </div>
     </div>

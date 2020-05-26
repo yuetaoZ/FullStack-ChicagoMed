@@ -8,7 +8,16 @@
     <script src="js/custom.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-
+    <script src="js/application.js"></script>
+    <script>
+        function login() {
+            var user = document.getElementById("username").value
+            if (validPatientIds.indexOf(user) >= 0) {
+                location.href='patient-appointments?user=' + user
+                sessionStorage.setItem('patientId', user)
+            }
+        }
+    </script>
 </head>
 <body>
 <center><h1>
@@ -20,10 +29,10 @@
     <form>
         <div class="container">
             <label>Username : </label>
-            <input type="text" placeholder="Enter Username" name="username">
+            <input type="text" id="username" placeholder="Enter Username" name="username">
             <label>Password : </label>
             <input type="password" placeholder="Enter Password" name="password">
-            <button onclick="location.href='patient-appointment'" type="button">Login</button>
+            <button onclick="login()" type="button">Login</button>
             <input type="checkbox" checked="checked"> Remember me
             Forgot <a href="#"> password? </a>
 

@@ -20,12 +20,12 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long appointmentId;
 
-    @Column(name = "appointmentdate")
+    @Column(name = "appointmentdatetime")
     private String appointmentDate;
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "patientid", nullable = false)
     @ToString.Exclude
@@ -33,7 +33,7 @@ public class Appointment {
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "doctorid", nullable = false)
     @ToString.Exclude
@@ -41,7 +41,7 @@ public class Appointment {
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "locationid", nullable = false)
     @ToString.Exclude
