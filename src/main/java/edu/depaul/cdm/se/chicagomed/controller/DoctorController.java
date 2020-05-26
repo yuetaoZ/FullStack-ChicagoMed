@@ -28,8 +28,8 @@ public class DoctorController {
     private PatientMedHistoryRepository patientMedHistoryRepository;
 
     @GetMapping("/doctor-appointments")
-    public String getDoctorAppointments(@RequestParam(name = "user", required = false, defaultValue = "none") String userId, Model model) {
-        Long docId = Long.parseLong(userId);
+    public String getDoctorAppointments(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) {
+        Long docId = Long.parseLong(doctorId);
         Optional<Doctor> doctor = doctorRepository.findById(docId);
         if (doctor.isPresent()) {
             List<Appointment> appts = appoinmentRepository.findAllByDoctor(doctor.get());

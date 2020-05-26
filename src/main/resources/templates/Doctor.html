@@ -13,7 +13,7 @@
         function login() {
             var user = document.getElementById("username").value
             if (validDoctorIds.indexOf(user) >= 0) {
-                location.href='doctor-appointments?user=' + user
+                location.href='doctor-appointments?doctorId=' + user
                 sessionStorage.setItem('doctorId', user)
             }
         }
