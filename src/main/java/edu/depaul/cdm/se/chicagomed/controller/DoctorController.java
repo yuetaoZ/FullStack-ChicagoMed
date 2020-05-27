@@ -1,31 +1,41 @@
 package edu.depaul.cdm.se.chicagomed.controller;
 
-import edu.depaul.cdm.se.chicagomed.model.Appointment;
-import edu.depaul.cdm.se.chicagomed.model.Doctor;
-import edu.depaul.cdm.se.chicagomed.model.Patient;
-import edu.depaul.cdm.se.chicagomed.model.PatientMedHistory;
-import edu.depaul.cdm.se.chicagomed.repository.AppoinmentRepository;
-import edu.depaul.cdm.se.chicagomed.repository.DoctorRepository;
-import edu.depaul.cdm.se.chicagomed.repository.PatientMedHistoryRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import edu.depaul.cdm.se.chicagomed.model.*;
+import edu.depaul.cdm.se.chicagomed.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.management.ObjectName;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 public class DoctorController {
+    @Autowired
+    private ObjectMapper objectMapper;
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
     private AppoinmentRepository appoinmentRepository;
     @Autowired
     private PatientMedHistoryRepository patientMedHistoryRepository;
+    @Autowired
+    private ApptNotesRepository apptNotesRepository;
+    @Autowired
+    private DoctorScheduleRepository doctorScheduleRepository;
 
     @GetMapping("/doctor-appointments")
     public String getDoctorAppointments(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) {
@@ -33,6 +43,7 @@ public class DoctorController {
         Optional<Doctor> doctor = doctorRepository.findById(docId);
         if (doctor.isPresent()) {
             List<Appointment> appts = appoinmentRepository.findAllByDoctor(doctor.get());
+            model.addAttribute("doctor", doctor.get());
             model.addAttribute("appts", appts);
             return "doctor-appointments";
         }
@@ -46,14 +57,85 @@ public class DoctorController {
             Patient patient = appt.get().getPatient();
             Optional<PatientMedHistory> patientMedHistory = patientMedHistoryRepository.findById(patient.getPatientId());
             model.addAttribute("patient", appt.get().getPatient());
-            patientMedHistory.ifPresent(medHistory -> model.addAttribute("patientMedHistory", medHistory.getMedicalHistory()));
+            patientMedHistory.ifPresentOrElse(medHistory -> model.addAttribute("patientMedHistory", medHistory.getMedicalHistory()), () -> model.addAttribute("patientMedHistory", ""));
+
+            Optional<ApptNotes> apptNotes = apptNotesRepository.findById(appt.get().getAppointmentId());
+            if (apptNotes.isPresent()) {
+                model.addAttribute("apptNotes", apptNotes.get());
+            } else {
+                ApptNotes newNotes = new ApptNotes();
+                newNotes.setAppointmentId(Long.parseLong(apptId));
+                model.addAttribute("apptNotes", newNotes);
+            }
             return "doctor-appointment";
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appt not found");
     }
 
+    @PostMapping("/appointment-notes")
+    public String saveAppointmentNotes(@ModelAttribute("apptNotes") ApptNotes apptNotes, BindingResult bindingResult) {
+        apptNotesRepository.save(apptNotes);
+        return "redirect:/doctor-appointment?apptId=" + apptNotes.getAppointmentId();
+    }
+
     @GetMapping("/doctor-schedule")
-    public String getDoctorSchedule(Model model) {
+    public String getDoctorSchedule(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) {
+        doctorScheduleRepository.deleteAll();
+        Optional<Doctor> doctor = doctorRepository.findById(Long.parseLong(doctorId));
+        model.addAttribute("doctor", doctor.get());
+        Optional<DoctorSchedule> doctorSchedule = doctorScheduleRepository.findById(doctor.get().getDoctorId());
+        if (doctorSchedule.isPresent()) {
+            DoctorSchedule schedule = doctorSchedule.get();
+            model.addAttribute("doctorSchedule", schedule);
+        } else {
+            DoctorSchedule newSchedule = new DoctorSchedule();
+            newSchedule.setDoctorId(Long.parseLong(doctorId));
+            newSchedule.setSchedule(getDefaultSchedule());
+            model.addAttribute("doctorSchedule", newSchedule);
+        }
         return "doctor-schedule";
     }
+
+    @PostMapping("/doctor-schedule")
+    public String saveDoctorSchedule(@ModelAttribute("doctorSchedule") DoctorSchedule doctorSchedule, BindingResult bindingResult) {
+        return "";
+    }
+
+    private Map<String, DaySchedule> getDefaultSchedule() {
+        Map<String, DaySchedule> scheduleMap = new HashMap<>();
+        DaySchedule monday = new DaySchedule();
+        monday.setDay("Monday");
+        monday.setStartTime("8am");
+        monday.setEndTime("5pm");
+
+        DaySchedule tuesday = new DaySchedule();
+        tuesday.setDay("Tuesday");
+        tuesday.setStartTime("8am");
+        tuesday.setEndTime("5pm");
+
+        DaySchedule wednesday = new DaySchedule();
+        wednesday.setDay("Wednesday");
+        wednesday.setStartTime("8am");
+        wednesday.setEndTime("5pm");
+
+        DaySchedule thursday = new DaySchedule();
+        thursday.setDay("Thursday");
+        thursday.setStartTime("8am");
+        thursday.setEndTime("5pm");
+
+        DaySchedule friday = new DaySchedule();
+        friday.setDay("Friday");
+        friday.setStartTime("8am");
+        friday.setEndTime("5pm");
+
+        scheduleMap.put(monday.getDay(), monday);
+        scheduleMap.put(tuesday.getDay(), tuesday);
+        scheduleMap.put(wednesday.getDay(), wednesday);
+        scheduleMap.put(thursday.getDay(), thursday);
+        scheduleMap.put(friday.getDay(), friday);
+
+        return scheduleMap;
+    }
+
+
 }

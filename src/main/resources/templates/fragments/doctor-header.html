@@ -9,8 +9,19 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="css/app.css">
             <title>Chicago Med</title>
+        <script>
+            function goToAppointments() {
+                var doctorId = sessionStorage.getItem('doctorId')
+                location.href='doctor-appointments?doctorId=' + doctorId
+            }
+            function goToSchedule() {
+                var doctorId = sessionStorage.getItem('doctorId')
+                location.href='doctor-schedule?doctorId=' + doctorId
+            }
+        </script>
     </head>
     <body>
+
         <div th:fragment="header" class="header">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -25,8 +36,8 @@
                     </div>
                     <div style="width: 25%; text-align: center;">
                         <ul class="nav navbar-nav">
-                            <li><h3><a href="/doctor-appointments">View your appointments</a></h3></li>
-                            <li><h3><a href="/doctor-schedule">Set your schedule</a></h3></li>
+                            <li><h3><button class="btn info" onclick="goToAppointments()">View your appointments</button></h3></li>
+                            <li><h3><button class="btn info" onclick="goToSchedule()">Set your schedule</button></h3></li>
                         </ul>
                     </div>
 

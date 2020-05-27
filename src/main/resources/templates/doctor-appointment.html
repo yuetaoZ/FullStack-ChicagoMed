@@ -29,13 +29,18 @@
         </div>
     </div>
 
-    <div style="width:45%; height: 33%; margin: auto; padding: 40px;">
-        <h2>Enter appointments notes here:</h2>
-        <textarea rows="15" cols="100"></textarea>
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary">Save</button>
-    </div>
+    <form action="#" th:action="@{/appointment-notes}" th:object="${apptNotes}" method="post">
+        <div style="width:45%; height: 33%; margin: auto; padding: 40px;">
+            <h2>Enter appointments notes here:</h2>
+            <input type="text" class="form-control" th:field="*{appointmentId}" placeholder="id" hidden="true"/>
+            <textarea th:field="*{appointmentNotes}" rows="15" cols="100"></textarea>
+        </div>
+        <div>
+            <button type="submit"  class="btn btn-primary">Save</button>
+        </div>
+    </form>
+
+
 
 </div>
 

@@ -9,7 +9,7 @@
 
 <div class="content">
     <div id="doctor-patient-view-label">
-        <h1>Upcoming Appointments for Dr. Smith</h1>
+        <h1>Upcoming Appointments for Dr. <span th:text="${doctor.getDoctorLastName()}"></span></h1>
     </div>
     <div class="doctor-patient-table">
         <div class="table-responsive">

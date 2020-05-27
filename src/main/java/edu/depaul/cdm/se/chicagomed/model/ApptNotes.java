@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "ApptNotes")
 public class ApptNotes {
     @Id
-    private int appointmentId;
-    private JsonNode appointmentNotes;
+    private long appointmentId;
+    private String appointmentNotes;
 
 }
