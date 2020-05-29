@@ -7,7 +7,7 @@
 <div th:replace="fragments/patient-header :: header"></div>
 
 <div id="doctor-patient-view-label">
-    <h1>Upcoming Appointments for <span th:text="${patient.getPatientFirstName() &nbsp; patient.getPatientLastName()}"></span></h1>
+    <h1>Upcoming Appointments for <span th:text="${patient.patientFirstName() &nbsp; patient.patientLastName()}"></span></h1>
 </div>
 
 <div>
