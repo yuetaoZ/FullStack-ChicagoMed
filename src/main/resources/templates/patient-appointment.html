@@ -3,61 +3,58 @@
 <head>
     <head th:replace="fragments/patient-header :: common-header">
     </head>
-    <body>
+<body>
 <div th:replace="fragments/patient-header :: header"></div>
 
-    <div id="doctor-patient-view-label">
-        <h1>Upcoming Appointments for John Doe</h1>
-    </div>
+<div id="doctor-patient-view-label">
+    <h1>Upcoming Appointments for <span th:text="${patient.getPatientFirstName() &nbsp; patient.getPatientLastName()}"></span></h1>
+</div>
 
-    <div>
-        <h2>Search for appointment by date:</h2>
-        <br/>
-        <input id = "apptdate" type = "date">
-        &emsp; and &emsp;
-        <input id = "apptdate" type = "date">
-    </div>
+<div>
+    <h2>Search for appointment by date:</h2>
     <br/>
-    <br/>
-    <div class="doctor-patient-table">
-        <div class="table-responsive">
+    <input id = "apptdate" type = "date">
+    &emsp; and &emsp;
+    <input id = "apptdate" type = "date">
+</div>
+<br/>
+<br/>
+<div class="doctor-patient-table">
+    <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th>Patient Name</th>
-                <th>Appointment Date</th>
+                <th>Patient First Name</th>
+                <th>Patient Last Name</th>
+                <th>Appointment Date/Time</th>
                 <th>Physician</th>
                 <th>Location</th>
-                <th>Time</th>
                 <th></th>
             </tr>
             </thead>
+            <tbody>
 
-            <tr>
-                <td>John Doe</td>
-                <td>May 1, 2020</td>
-                <td>Dr. John Smith</td>
-                <td>Northwestern Hospital</td>
-                <td>2:00 PM</td>
-                <td><input type="button" style="background-color:red;color:black;width:150px;
-                height:40px;" value="Cancel"></td>
+            <tr th:if="${appts.empty}">
+                <td colspan="2"> No Appointments Available </td>
             </tr>
-
-            <tr>
-                <td>John Doe</td>
-                <td>May 30, 2020</td>
-                <td>Dr. Steven Jones</td>
-                <td>Northwestern Hospital</td>
-                <td>10:00 AM</td>
-                <td><input type="button" style="background-color:red;color:black;width:150px;
+            <tr th:each="appt : ${appts}">
+                <td span th:text="${appt.patient.patientFirstName}"></td>
+                <td span th:text="${appt.patient.patientLastName}"></td>
+                <td span th:text="${appt.appointmentDateTime}"></td>
+                <td span th:text="Dr. ${appt.Doctor.doctorLastName}"></td>
+                <td span th:text="Dr. ${appt.Location.locationName}"></td>
+                <td><a th:href="@{/doctor-appointment(apptId=${appt.appointmentId})}">View Patient Details</a></td>
+            </tr>
+            <td><input type="button" style="background-color:red;color:black;width:150px;
                 height:40px;" value="Cancel"></td>
             </tr>
         </table>
-        </div>
     </div>
+</div>
 
 
 
 <!--    <div th:replace="fragments/footer :: footer"></div>-->
 </body>
 </html>
+© 2020 GitHub, Inc.
