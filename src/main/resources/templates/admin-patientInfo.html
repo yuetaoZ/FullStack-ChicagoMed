@@ -11,27 +11,35 @@
         <h1>Patient Information</h1>
     </div>
 
+    <script>
+        function back() {
+            var adminId = sessionStorage.getItem('adminId')
+            location.href='admin-patients?adminId=' + adminId
+        }
+    </script>
+
     <div>
-        <a href="/admin-appointments"> <- Back to Patient List</a>
+        <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient List</button>
+
     </div>
 
     <div class="admin-patientInfo-table">
         <table class="table table-striped table-bordered" style="text-align:left">
             <thead>
                 <tr>
-                    <th>Patient Information</th>
+                    <th>Patient ID: <span th:text="${patient.getPatientId()}"></span></th>
                     <th><button type="button" class="btn btn-light"><a href="/admin-patientInfo-edit">Edit Information</a></button></th>
                 </tr>
             </thead>
 
             <tr>
-                <td>First Name: Ada</td>
-                <td>Last Name: Lovelace</td>
+                <td>Fisrt Name: <span th:text="${patient.getPatientFirstName()}"></span></td>
+                <td>Last Name: <span th:text="${patient.getPatientLastName()}"></span></td>
             </tr>
 
             <tr>
-                <td>DOB: December 10, 1815</td>
-                <td>Gender: Female</td>
+                <td>DOB: <span th:text="${patient.getPatientDOB()}"></span></td>
+                <td>Gender: <span th:text="${patient.getPatientGender()}"></span></td>
             </tr>
 
             <tr>
@@ -39,18 +47,18 @@
             </tr>
 
             <tr>
-                <td>Email: AdaLove@mail.depaul.edu</td>
-                <td>Phone: 123-456-7891</td>
+                <td>Email: <span th:text="${patientContact.getEmail()}"></span></td>
+                <td>Phone: <span th:text="${patientContact.getPhonenumber()}"></span></td>
             </tr>
 
             <tr>
-                <td>Address: 1601 N Clark St</td>
-                <td>City: Chicago</td>
+                <td>Address: <span th:text="${patientContact.getAddress()}"></span></td>
+                <td>City: <span th:text="${patientContact.getCity()}"></span></td>
             </tr>
 
             <tr>
-                <td>State: Illinois</td>
-                <td>Zipcode: 60614</td>
+                <td>State: <span th:text="${patientContact.getState()}"></span></td>
+                <td>Zipcode: <span th:text="${patientContact.getZipcode()}"></span></td>
             </tr>
 
             <tr>

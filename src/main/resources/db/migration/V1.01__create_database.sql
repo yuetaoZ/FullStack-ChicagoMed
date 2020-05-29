@@ -1,7 +1,7 @@
-insert into patient(patientid, patientfirstname,patientlastname) values (12345, 'Dwight', 'Schrute');
-insert into patient(patientid, patientfirstname,patientlastname) values (12346, 'Jim', 'Halpert');
-insert into patient(patientid, patientfirstname,patientlastname) values (12347, 'Pam', 'Beasley');
-insert into patient(patientid, patientfirstname,patientlastname) values (12348, 'Michael','Scott');
+insert into patient(patientid, patientfirstname,patientlastname,patientDOB,patientGender) values (12345, 'Dwight', 'Schrute','1975-02-13','Male');
+insert into patient(patientid, patientfirstname,patientlastname,patientDOB,patientGender) values (12346, 'Jim', 'Halpert','1983-12-12','Male');
+insert into patient(patientid, patientfirstname,patientlastname,patientDOB,patientGender) values (12347, 'Pam', 'Beasley','1986-04-19','Female');
+insert into patient(patientid, patientfirstname,patientlastname,patientDOB,patientGender) values (12348, 'Michael','Scott','1972-10-15','Male');
 
 insert into patientcontact(patientid, email, phonenumber, address, city, state, zipcode) values (12345, 'dwightschrute@gmail.com', '773-123-4567', '100 N La Salle St', 'Chicago', 'Illinois', 60601);
 insert into patientcontact(patientid, email, phonenumber, address, city, state, zipcode) values (12346, 'jimhalpert@gmail.com', '773-424-5948', '2700 N Hampden Ct', 'Chicago', 'Illinois', 60614);

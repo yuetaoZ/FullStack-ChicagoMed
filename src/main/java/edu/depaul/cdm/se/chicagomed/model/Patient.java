@@ -25,4 +25,10 @@ public class Patient implements Serializable {
     @Column(name = "patientlastname")
     private String patientLastName;
 
+    @Column(name = "patientdob")
+    private String patientDOB;
+
+    @Column(name = "patientgender")
+    private String patientGender;
+
 }

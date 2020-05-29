@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se.chicagomed.controller;
 
 import edu.depaul.cdm.se.chicagomed.model.*;
+import edu.depaul.cdm.se.chicagomed.repository.PatientContactRepository;
 import edu.depaul.cdm.se.chicagomed.repository.PatientDOBRepository;
 import edu.depaul.cdm.se.chicagomed.repository.PatientRepository;
 import edu.depaul.cdm.se.chicagomed.repository.AdminRepository;
@@ -22,7 +23,7 @@ public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
     @Autowired
-    private PatientDOBRepository patientDOBRepository;
+    private PatientContactRepository patientContactRepository;
 
     @GetMapping("admin-patients")
     public String getPatients(@RequestParam(name = "adminId", required = false, defaultValue = "none") String adminId, Model model) {
@@ -44,10 +45,10 @@ public class AdminController {
     @GetMapping("/admin-patientInfo")
     public String getPatientInfo(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
         Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
-        Optional<PatientDOB> patientDOB = patientDOBRepository.findById(Long.parseLong(patientId));
+        Optional<PatientContact> patientContact = patientContactRepository.findById(Long.parseLong(patientId));
         if (patient.isPresent()) {
-            model.addAttribute("patient", patient);
-            model.addAttribute("patientDOB", patientDOB);
+            model.addAttribute("patient", patient.get());
+            model.addAttribute("patientContact", patientContact.get());
 
             return "admin-patientInfo";
         }
