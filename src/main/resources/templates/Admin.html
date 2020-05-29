@@ -13,7 +13,7 @@
         function login() {
             var user = document.getElementById("username").value
             if (validAdminIds.indexOf(user) >= 0) {
-                location.href='admin-appointments?user=' + user
+                location.href='admin-patients?adminId=' + user
                 sessionStorage.setItem('adminId', user)
             }
         }
