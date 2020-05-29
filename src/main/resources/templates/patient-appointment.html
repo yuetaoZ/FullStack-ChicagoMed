@@ -7,7 +7,8 @@
 <div th:replace="fragments/patient-header :: header"></div>
 
 <div id="doctor-patient-view-label">
-    <h1>Upcoming Appointments for <span th:text="${patient.patientFirstName() &nbsp; patient.patientLastName()}"></span></h1>
+    <h1>Upcoming Appointments for <span th:text="${patient.patientFirstName}"></span> <span
+            th:text="${patient.patientLastName}"></span></h1>
 </div>
 
 <div>
@@ -40,13 +41,12 @@
             <tr th:each="appt : ${appts}">
                 <td span th:text="${appt.patient.patientFirstName}"></td>
                 <td span th:text="${appt.patient.patientLastName}"></td>
-                <td span th:text="${appt.appointmentDateTime}"></td>
-                <td span th:text="Dr. ${appt.Doctor.doctorLastName}"></td>
-                <td span th:text="Dr. ${appt.Location.locationName}"></td>
-                <td><a th:href="@{/doctor-appointment(apptId=${appt.appointmentId})}">View Patient Details</a></td>
-            </tr>
-            <td><input type="button" style="background-color:red;color:black;width:150px;
+                <td span th:text="${appt.appointmentDate}"></td>
+                <td>Dr. <span th:text="${appt.doctor.doctorLastName}"></td>
+                <td span th:text="${appt.location.locationName}"></td>
+                <td><input type="button" style="background-color:red;color:black;width:150px;
                 height:40px;" value="Cancel"></td>
+            </tr>
             </tr>
         </table>
     </div>
