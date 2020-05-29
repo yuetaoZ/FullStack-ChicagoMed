@@ -19,6 +19,9 @@ public class Location implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long locationid;
 
+    @Column(name = "locationname")
+    private String locationName;
+
     @Column(name = "address")
     private String address;
 
