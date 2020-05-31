@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        <a href="/admin-patientInfo"> <- Back to Patient Information</a>
+        <a type="button" class="btn btn-secondary" th:href="@{/admin-patientInfo(patientId=${patient.getPatientId()})}">Back to Patient Information </a>
     </div>
 
     <div class="admin-patientInfo-table">
@@ -30,26 +30,22 @@
                 <td>Cancel Appointment</td>
             </tr>
 
-            <tr>
-                <td>007</td>
-                <td><a href="/admin-patient-upcoming-appointment-details"> View</a></td>
-                <td>05/30/2020</td>
-                <td><button type="button" class="btn btn-danger">Cancel</button></td>
+            <tbody>
+            <tr th:if="${appointments.empty}">
+                <td colspan="4"> No Appointments Available </td>
             </tr>
+            <tr th:each="appointment : ${appointments}">
+                <td span th:text="${appointment.getAppointmentId()}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/admin-patient-upcoming-appointment-details(appointmentId=${appointment.getAppointmentId()})}"> View </a>
+                </td>
+                <td span th:text="${appointment.getAppointmentDate()}"></td>
+                <td>
+                    <button type="submit"  class="btn btn-danger">Cancel</button>
+                </td>
+            </tr>
+            </tbody>
 
-            <tr>
-                <td>008</td>
-                <td><a href="/admin-patient-upcoming-appointment-details"> View</a></td>
-                <td>7/20/2020</td>
-                <td><button type="button" class="btn btn-danger">Cancel</button></td>
-            </tr>
-
-            <tr>
-                <td>009</td>
-                <td><a href="/admin-patient-upcoming-appointment-details"> View</a></td>
-                <td>10/01/2020</td>
-                <td><button type="button" class="btn btn-danger">Cancel</button></td>
-            </tr>
         </table>
     </div>
 </div>

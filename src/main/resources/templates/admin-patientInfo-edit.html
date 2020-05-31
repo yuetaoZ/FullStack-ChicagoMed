@@ -11,27 +11,35 @@
         <h1>Patient Information</h1>
     </div>
 
+    <script>
+        function back() {
+            var adminId = sessionStorage.getItem('adminId')
+            location.href='admin-patients?adminId=' + adminId
+        }
+    </script>
+
     <div>
-        <a href="/admin-appointments"> <- Back to Patient List</a>
+        <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient List</button>
+
     </div>
 
     <div class="admin-patientInfo-table">
         <table class="table table-striped table-bordered" style="text-align:left">
             <thead>
                 <tr>
-                    <th>Patient Information</th>
-                    <th><button type="button" class="btn btn-success"><a href="/admin-patientInfo">Save</a></button></th>
+                    <th>Patient ID:  <span th:text="${patient.getPatientId()}"></span></th>
+                    <th><button type="submit"  class="btn btn-success">Save</button></th>
                 </tr>
             </thead>
 
             <tr>
-                <td>First Name: Ada</td>
-                <td>Last Name: Lovelace</td>
+                <td><form>First Name: <input type="text" name="firstName" th:placeholder="${patient.getPatientFirstName()}"> </form></td>
+                <td>Last Name: <input type="text" name="lastName" th:placeholder="${patient.getPatientLastName()}"> </form></td>
             </tr>
 
             <tr>
-                <td>DOB: December 10, 1815</td>
-                <td>Gender: Female</td>
+                <td>DOB: <input type="text" name="DOB" th:placeholder="${patient.getPatientDOB()}"> </form></td>
+                <td>Gender: <input type="text" name="gender" th:placeholder="${patient.getPatientGender()}"> </form></td>
             </tr>
 
             <tr>
@@ -39,18 +47,18 @@
             </tr>
 
             <tr>
-                <td>Email: AdaLove@mail.depaul.edu</td>
-                <td>Phone: 123-456-7891</td>
+                <td>Email: <input type="text" name="email" th:placeholder="${patientContact.getEmail()}"> </form></td>
+                <td>Phone: <input type="text" name="phone" th:placeholder="${patientContact.getPhonenumber()}"> </form></td>
             </tr>
 
             <tr>
-                <td>Address: 1601 N Clark St</td>
-                <td>City: Chicago</td>
+                <td>Address: <input type="text" name="address" th:placeholder="${patientContact.getAddress()}"> </form></td>
+                <td>City: <input type="text" name="city" th:placeholder="${patientContact.getCity()}"> </form></td>
             </tr>
 
             <tr>
-                <td>State: Illinois</td>
-                <td>Zipcode: 60614</td>
+                <td>State: <input type="text" name="state" th:placeholder="${patientContact.getState()}"> </form></td>
+                <td>Zipcode: <input type="text" name="zipcode" th:placeholder="${patientContact.getZipcode()}"> </form></td>
             </tr>
 
             <tr>
@@ -60,7 +68,7 @@
 
             <tr>
                 <td>Upcoming Appointments:</td>
-                <td><a href="/admin-patient-upcoming-appointments">View</a></td>
+                <td><a class="btn btn-primary" th:href="@{/admin-patient-upcoming-appointments(patientId=${patient.getPatientId()})}"> View </a></td>
             </tr>
         </table>
     </div>

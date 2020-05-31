@@ -20,7 +20,6 @@
 
     <div>
         <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient List</button>
-
     </div>
 
     <div class="admin-patientInfo-table">
@@ -28,7 +27,7 @@
             <thead>
                 <tr>
                     <th>Patient ID: <span th:text="${patient.getPatientId()}"></span></th>
-                    <th><button type="button" class="btn btn-light"><a href="/admin-patientInfo-edit">Edit Information</a></button></th>
+                    <th><button type="button" class="btn btn-light"><a th:href="@{/admin-patientInfo-edit(patientId=${patient.getPatientId()})}">Edit Information</a></button></th>
                 </tr>
             </thead>
 
@@ -68,7 +67,7 @@
 
             <tr>
                 <td>Upcoming Appointments:</td>
-                <td><a href="/admin-patient-upcoming-appointments">View</a></td>
+                <td><a class="btn btn-primary" th:href="@{/admin-patient-upcoming-appointments(patientId=${patient.getPatientId()})}"> View </a></td>
             </tr>
         </table>
     </div>
