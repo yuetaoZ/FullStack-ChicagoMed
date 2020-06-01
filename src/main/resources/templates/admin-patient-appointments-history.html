@@ -26,19 +26,20 @@
                 </tr>
             </thead>
 
-            <tr>
-                <td>001</td>
-                <td>Ada Lovelace</td>
-                <td>12/10/1815</td>
-                <td>Female</td>
+            <tr th:each="Patient:${patient}">
+
+                <td th:text="${patient.getPatientId()}"</td>
+                <td th:text="${patient.getPatientFirstName().concat( ' '+ patient.getPatientLastName() ) }"</td>
+                <td th:text="${patient.getPatientDOB()}"</td>
+                <td th:text="${patient.getPatientGender()}"</td>
             </tr>
         </table>
 
         <table class="table table-striped table-bordered" style="text-align:left">
             <thead>
-                <tr>
-                    <th colspan="3">Appointment History</th>
-                </tr>
+            <tr>
+                <th colspan="3">Appointment History</th>
+            </tr>
             </thead>
 
             <tr>
@@ -47,43 +48,31 @@
                 <td>Billing Info</td>
             </tr>
 
-            <tr>
-                <td>001</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
+            <tr th:each="appts:${appointment}">
+                <td th:text="${appts.appointmentId}"</td>
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-appointment-details(appts=${appts.getAppointmentId()})}">View</a></td>
+
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-billing-info(appts=${appts.getAppointmentId()})}">View</a></td>
+
             </tr>
 
-            <tr>
-                <td>002</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
+            <tr th:each="appts:${appointment}">
+                <td th:text="${appts.appointmentId}"</td>
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-appointment-details(appts=${appts.getAppointmentId()})}">View</a></td>
+
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-billing-info(appts=${appts.getAppointmentId()})}">View</a></td>
             </tr>
 
-            <tr>
-                <td>003</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
+            <tr th:each="appts:${appointment}">
+                <td th:text="${appts.appointmentId}"</td>
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-appointment-details(appts=${appts.getAppointmentId()})}">View</a></td>
+
+                <td><a type="button" class="btn btn-secondary" th:href="@{/admin-patient-billing-info(appts=${appts.getAppointmentId()})}">View</a></td>
             </tr>
 
-            <tr>
-                <td>004</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
-            </tr>
-
-            <tr>
-                <td>005</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
-            </tr>
-
-            <tr>
-                <td>006</td>
-                <td><a href="/admin-patient-appointment-details">View</a></td>
-                <td><a href="/admin-patient-billing-info">View</a></td>
-            </tr>
         </table>
-    </div>
+                </div>
+
 </div>
 
 <div th:replace="fragments/app-footer :: footer"></div>

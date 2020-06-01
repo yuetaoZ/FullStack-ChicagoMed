@@ -7,10 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,6 +28,8 @@ public class AdminController {
     private AppoinmentRepository appointmentRepository;
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
+    private BillRepository billRepository;
 
 
 
@@ -73,10 +77,31 @@ public class AdminController {
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Patient not found");
     }
 
+
+
     @GetMapping("/admin-patient-appointments-history")
-    public String getPatientAppointmentsHistory(Model model) {
-        return "admin-patient-appointments-history";
+    public String getPatientAppointmentsHistory(@RequestParam (name = "patientId", required = false, defaultValue = "none")  String patientId , Model model) {
+
+        Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
+
+
+        if (patient.isPresent()) {
+
+            Iterable<Appointment> appts = appointmentRepository.findAllByPatient(patient.get());
+
+            model.addAttribute("patient", patient.get());
+            model.addAttribute("appointments",patient.get());
+            model.addAttribute("appointment",appts);
+
+           return "admin-patient-appointments-history";
+        }
+
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appointment not found");
     }
+
+
+
+
 
     @GetMapping("/admin-patient-upcoming-appointments")
     public String getPatientUpcomingAppointments(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
@@ -115,7 +140,28 @@ public class AdminController {
     }
 
     @GetMapping("/admin-patient-billing-info")
-    public String getPatientBillingInfo(Model model) {
-        return "admin-patient-billing-info";
+    public String getPatientBillingInfo(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
+
+        Optional<Patient> patients = patientRepository.findById(Long.parseLong(patientId));
+        Optional<Bill> bill = billRepository.findById(Long.parseLong(patientId));
+
+
+        if (patients.isPresent()) {
+
+            Iterable<Appointment> appts = appointmentRepository.findAllByPatient(patients.get());
+
+            model.addAttribute("patient", patients.get());
+            model.addAttribute("appointments",patients.get());
+            model.addAttribute("appointment",appts);
+            model.addAttribute("billing",bill.get());
+
+
+            return "admin-patient-billing-info";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appointment not found");
+
+
+
+
     }
 }

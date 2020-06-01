@@ -12,8 +12,9 @@ public interface AppoinmentRepository extends CrudRepository<Appointment, Long> 
 
     List<Appointment> findAllByDoctor(Doctor doctor);
 
-    List<Appointment> findAllByPatient(Patient patient);
+   List<Appointment> findAllByPatient(Patient patient);
 
     @Override
     List<Appointment> findAll();
+
 }

@@ -31,4 +31,8 @@ public class Patient implements Serializable {
     @Column(name = "patientgender")
     private String patientGender;
 
+
+
+
+
 }
