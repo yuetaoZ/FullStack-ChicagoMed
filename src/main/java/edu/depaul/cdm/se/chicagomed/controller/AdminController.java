@@ -95,10 +95,9 @@ public class AdminController {
     @GetMapping("/admin-patient-upcoming-appointment-details")
     public String getPatientUpcomingAppointmentDetails(@RequestParam(name = "appointmentId", required = false, defaultValue = "none") String appointmentId, Model model) {
         Optional<Appointment> appointment = appointmentRepository.findById(Long.parseLong(appointmentId));
-        Optional<Patient> patient = patientRepository.findById(appointment.get().getAppointmentId());
+        Optional<Patient> patient = patientRepository.findById(appointment.get().getPatient().getPatientId());
         Optional<Doctor> doctor = doctorRepository.findById(appointment.get().getDoctor().getDoctorId());
         if (appointment.isPresent()) {
-            System.out.println("appointment is presented.");
             model.addAttribute("patient", patient.get());
             model.addAttribute("doctor", doctor.get());
             model.addAttribute("appointment", appointment.get());

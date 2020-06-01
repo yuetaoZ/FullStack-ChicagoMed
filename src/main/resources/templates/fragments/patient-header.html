@@ -25,10 +25,10 @@
                 </div>
                 <div style="width: 25%; text-align: center;">
                     <ul class="nav navbar-nav">
-                        <li><h3><a href="/patient-appointment">View Your Appointments</a></h3></li>
-                        <li><h3><a href="/new-appointment">Schedule a New Appointment</a></h3></li>
+                        <li><h3><a type="link" class="btn btn-secondary" th:href="@{/patient-appointment(patientId=${patient.getPatientId()})}">View Your Appointments</a></h3></li>
+                        <li><h3><a type="link" class="btn btn-secondary" th:href="@{/new-appointment(patientId=${patient.getPatientId()})}">Schedule a New Appointment</a></h3></li>
                         <li><h3><a href="/list-locations">Review Location</a> </h3></li>
-                        <li><h3><a href="/list-doctors">View Doctor</a> </h3></li>
+                        <li><h3><a href="/list-doctors">Review Doctor</a> </h3></li>
                     </ul>
                 </div>
 
