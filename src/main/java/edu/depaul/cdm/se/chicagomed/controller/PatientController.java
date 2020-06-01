@@ -1,14 +1,8 @@
 package edu.depaul.cdm.se.chicagomed.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.depaul.cdm.se.chicagomed.model.Appointment;
-import edu.depaul.cdm.se.chicagomed.model.Doctor;
-import edu.depaul.cdm.se.chicagomed.model.DoctorContact;
-import edu.depaul.cdm.se.chicagomed.model.Patient;
-import edu.depaul.cdm.se.chicagomed.repository.AppoinmentRepository;
-import edu.depaul.cdm.se.chicagomed.repository.DoctorContactRepository;
-import edu.depaul.cdm.se.chicagomed.repository.DoctorRepository;
-import edu.depaul.cdm.se.chicagomed.repository.PatientRepository;
+import edu.depaul.cdm.se.chicagomed.model.*;
+import edu.depaul.cdm.se.chicagomed.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -33,6 +27,8 @@ public class PatientController {
     private DoctorRepository doctorRepository;
     @Autowired
     private DoctorContactRepository doctorContactRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
 
     @GetMapping("/patient-appointment")
@@ -56,6 +52,12 @@ public class PatientController {
     @GetMapping("/location-view")
     public String getLocationview(Model model){return "location-view";}
 
+    @GetMapping("/list-locations")
+    public String getListLocations(Model model){
+        Iterable<Location> locs = locationRepository.findAll();
+        model.addAttribute("locs",locs);
+        return "list-locations";
+    }
 
     @GetMapping("/list-doctors")
     public String getListDoctors(Model model){
@@ -75,15 +77,17 @@ public class PatientController {
 //    }
 
     @GetMapping("/doctor-View")
-    public String getDoctorView(@RequestParam(name = "doctorId", required = false, defaultValue = "none")String doctorId,  Model model){
-        long docId = Long.parseLong(doctorId);
-        Optional<DoctorContact> contact = doctorContactRepository.findById(docId);
-        if (contact.isPresent()){
-            model.addAttribute("contact",contact);
-            return "doctor-view";
-        }
-        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor not found!");
-    }
+    public String getDoctorView(Model model){return "doctor-view";}
+    //TODO
+//    public String getDoctorView(@RequestParam(name = "doctorId", required = false, defaultValue = "none")String doctorId,  Model model){
+//        long docId = Long.parseLong(doctorId);
+//        Optional<DoctorContact> contact = doctorContactRepository.findById(docId);
+//        if (contact.isPresent()){
+//            model.addAttribute("contact",contact);
+//            return "doctor-view";
+//        }
+//        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor not found!");
+//    }
 
     @GetMapping("/review-page")
     public String getReview(Model model){return "review-page";}
