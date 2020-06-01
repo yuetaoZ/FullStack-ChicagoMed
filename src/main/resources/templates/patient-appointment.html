@@ -7,17 +7,10 @@
 <div th:replace="fragments/patient-header :: header"></div>
 
 <div id="doctor-patient-view-label">
-    <h1>Upcoming Appointments for <span th:text="${patient.patientFirstName}"></span> <span
-            th:text="${patient.patientLastName}"></span></h1>
+    <h1>Upcoming Appointments for <span th:text="${patient.patientFirstName}"></span>
+        <span th:text="${patient.patientLastName}"></span></h1>
 </div>
 
-<div>
-    <h2>Search for appointment by date:</h2>
-    <br/>
-    <input id = "apptdate" type = "date">
-    &emsp; and &emsp;
-    <input id = "apptdate" type = "date">
-</div>
 <br/>
 <br/>
 <div class="doctor-patient-table">
@@ -44,8 +37,7 @@
                 <td span th:text="${appt.appointmentDate}"></td>
                 <td>Dr. <span th:text="${appt.doctor.doctorLastName}"></td>
                 <td span th:text="${appt.location.locationName}"></td>
-                <td><input type="button" style="background-color:red;color:black;width:150px;
-                height:40px;" value="Cancel"></td>
+                <td><a class="btn btn-danger" th:href="@{/cancel-appointment(delete,id=${appt.appointmentId})}"> Delete </a></td>
             </tr>
             </tr>
         </table>

@@ -24,7 +24,6 @@ public class Appointment {
     private String appointmentDate;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "patientid", nullable = false)
@@ -32,7 +31,6 @@ public class Appointment {
     private Patient patient;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "doctorid", nullable = false)
@@ -40,11 +38,11 @@ public class Appointment {
     private Doctor doctor;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "locationid", nullable = false)
     @ToString.Exclude
     private Location location;
+
 
 }

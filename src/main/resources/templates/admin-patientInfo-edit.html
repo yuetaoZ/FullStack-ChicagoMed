@@ -11,16 +11,8 @@
         <h1>Patient Information</h1>
     </div>
 
-    <script>
-        function back() {
-            var adminId = sessionStorage.getItem('adminId')
-            location.href='admin-patients?adminId=' + adminId
-        }
-    </script>
-
     <div>
-        <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient List</button>
-
+        <a type="button" class="btn btn-secondary" th:href="@{/admin-patientInfo(patientId=${patient.getPatientId()})}">Back to Patient Info</a>
     </div>
 
     <div class="admin-patientInfo-table">

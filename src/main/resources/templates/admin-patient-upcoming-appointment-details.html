@@ -8,7 +8,7 @@
 
 <div class="admin-patient-upcoming-appointment-details-view">
     <div>
-        <h1>Upcoming Appointments</h1>
+        <h1>Upcoming Appointment</h1>
     </div>
 
     <div>
@@ -55,12 +55,18 @@
 
             <tr>
                 <td>Doctor:</td>
-                <td span th:text="Dr.${doctor.getDoctorLastName()}"></td>
+                <td> <span>Dr. </span> <span th:text="${doctor.getDoctorLastName()}"></span></td>
             </tr>
 
             <tr>
                 <td>Location:</td>
-                <td span th:text="${appointment.getLocation()}"></td>
+                <td>
+                    <span th:text="${appointment.getLocation().getLocationName()}"></span><span>, </span>
+                    <span th:text="${appointment.getLocation().getAddress()}"></span><span>, </span>
+                    <span th:text="${appointment.getLocation().getCity()}"></span><span>, </span>
+                    <span th:text="${appointment.getLocation().getState()}"></span><span>, </span>
+                    <span th:text="${appointment.getLocation().getZipcode()}"></span>
+                </td>
             </tr>
             </tbody>
 
@@ -74,7 +80,7 @@
             </thead>
 
             <tr>
-                <td>Add some Notes...</td>
+                <td>Some Notes...</td>
             </tr>
         </table>
     </div>
