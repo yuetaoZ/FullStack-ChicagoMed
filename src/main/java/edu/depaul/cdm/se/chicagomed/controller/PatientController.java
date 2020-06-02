@@ -108,9 +108,9 @@ public class PatientController {
     public String getReview(Model model){return "review-page";}
 
     @PostMapping("/new-appointment")
-    public String saveNewAppointment(@ModelAttribute("NewAppointment") NewAppointment newAppointment, BindingResult bindingResult) {
-        //apptNotesRepository.save(apptNotes);
-        return "redirect:/patient-appointment?patientId=";
+    public String saveNewAppointment(@ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult) {
+        appoinmentRepository.save(appointment);
+        return "redirect:/patient-appointment?patientId=" + appointment.getPatient().getPatientId();
     }
 
 //    @GetMapping("/doctor-schedule")
@@ -125,6 +125,15 @@ public class PatientController {
         );
         appoinmentRepository.delete(appointment);
         return "redirect:/patient-appointment?patientId=" + appointment.getPatient().getPatientId();
+    }
+
+    @GetMapping(path="/new-appointment", params = "add")
+    public String add(@RequestParam Long id) {
+        Appointment appointment = appoinmentRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Appointment ID:" + id)
+        );
+        appoinmentRepository.save(appointment);
+        return "redirect:/patient-appointment" + appointment.getPatient().getPatientId();
     }
 
 }

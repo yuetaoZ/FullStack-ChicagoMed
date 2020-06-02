@@ -36,16 +36,16 @@
 <!--            <a class="btn btn-lg btn-warning" th:href="@{/airport}"> Cancel </a></td>-->
 <!--        </form>-->
 
-    <form action="#" th:action="@{/new-appointment}" th:object="${NewAppointment}" method="post">
+    <form action="#" th:action="@{/new-appointment}" th:object="${appts}" method="post">
     <div>
     <p style="text-align:left;">
         &ensp; Please complete the following information:
         <br/>
         <br/>
         &ensp; Location:
-        <select th:field="*{locationId}">
-            <option th:value="56788">Northwestern Hospital </option>
-            <option th:value="56789">Chicago Primary Care</option>
+        <select id="locationId" name="locationName">
+            <option value="56788">Northwestern Hospital</option>
+            <option value="56789"> Chicago Primary Care</option>
         </select>
         <br/>
         <br/>
@@ -58,14 +58,14 @@
         <br/>
         <br/>
         &ensp; Doctor:
-        <select id="doctor">
-            <option value="johnsmith">Dr. John Smith</option>
-            <option value="stevenjones">Dr. Steven Jones</option>
-            <option value="amywhite">Dr. Amy White</option>
+        <select id="doctorId" name="doctorFirstName &nbsp; doctorLastName">
+            <option value="1">Dr. Michael Jordan</option>
+            <option value="2">Dr. Jerry Seinfeld</option>
+            <option value="3">Dr. Luke Skywalker</option>
         </select>
         <br/>
         <br/>
-        &ensp; Appointment Date and Time: <input id="apptdate" type = "datetime-local">
+        &ensp; Appointment Date and Time: <input id="appointmentdatetime" type = "datetime-local">
         <br/>
         <br/>
         &ensp; <input type = submit>

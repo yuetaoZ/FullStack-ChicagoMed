@@ -48,7 +48,7 @@ CREATE TABLE bill(
 
 Create Table appointment (
     appointmentid SERIAL,
-    appointmentdatetime timestamp without time zone NOT NULL DEFAULT '2020-04-28 12:00:00'::timestamp without time zone,
+    appointmentdatetime varchar,
     patientid integer,
     doctorid integer,
     locationid integer
