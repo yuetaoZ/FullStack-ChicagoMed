@@ -37,12 +37,12 @@
             </tr>
 
             <tr>
-                <td>DOB: <span th:text="${patient.getPatientDOB()}"></span></td>
+                <td>DOB: <span th:text="${patient.getPatientDOB().toString().substring(0,10)}"></span></td>
                 <td>Gender: <span th:text="${patient.getPatientGender()}"></span></td>
             </tr>
 
             <tr>
-                <td colspan="2">Contact Information:</td>
+                <td colspan="2"><b>Contact Information:</b></td>
             </tr>
 
             <tr>

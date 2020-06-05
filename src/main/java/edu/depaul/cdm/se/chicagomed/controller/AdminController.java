@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.sql.Date;
@@ -63,13 +62,16 @@ public class AdminController {
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Patient not found");
     }
 
+
     @GetMapping("/admin-patientInfo-edit")
     public String getPatientInfoEdit(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
         Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
         Optional<PatientContact> patientContact = patientContactRepository.findById(Long.parseLong(patientId));
+        Patient updatedPatient = new Patient();
         if (patient.isPresent()) {
             model.addAttribute("patient", patient.get());
             model.addAttribute("patientContact", patientContact.get());
+            model.addAttribute("updatedPatient", updatedPatient);
 
             return "admin-patientInfo-edit";
         }
@@ -77,6 +79,20 @@ public class AdminController {
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Patient not found");
     }
 
+    @PostMapping(path="/admin-patientInfo-update")
+    public String updatePatientInfo(@RequestParam(value="saveButton") Long patientId, @ModelAttribute("updatedPatient") Patient updatedPatient) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Patient ID:" + patientId)
+        );
+
+        patient.setPatientFirstName(updatedPatient.getPatientFirstName());
+        patient.setPatientLastName(updatedPatient.getPatientLastName());
+        patient.setPatientDOB(updatedPatient.getPatientDOB());
+        patient.setPatientGender(updatedPatient.getPatientGender());
+
+        patientRepository.save(patient);
+        return "redirect:/admin-patientInfo?patientId=" + patient.getPatientId();
+    }
 
 
     @GetMapping("/admin-patient-appointments-history")
@@ -100,9 +116,6 @@ public class AdminController {
     }
 
 
-
-
-
     @GetMapping("/admin-patient-upcoming-appointments")
     public String getPatientUpcomingAppointments(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
         Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
@@ -115,6 +128,15 @@ public class AdminController {
         }
 
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appointments not found");
+    }
+
+    @GetMapping(path="/admin-cancel-appointment", params = "delete")
+    public String delete(@RequestParam Long id) {
+        Appointment appointment = appointmentRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Appointment ID:" + id)
+        );
+        appointmentRepository.delete(appointment);
+        return "redirect:/admin-patient-upcoming-appointments?patientId=" + appointment.getPatient().getPatientId();
     }
 
     @GetMapping("/admin-patient-upcoming-appointment-details")

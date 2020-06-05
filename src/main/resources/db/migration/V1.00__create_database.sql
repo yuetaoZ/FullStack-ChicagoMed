@@ -2,7 +2,7 @@ CREATE TABLE patient (
     patientid SERIAL,
     patientfirstname varchar (255),
     patientlastname varchar (255),
-    patientDOB date,
+    patientDOB varchar (255),
     patientGender varchar (255)
 );
 
