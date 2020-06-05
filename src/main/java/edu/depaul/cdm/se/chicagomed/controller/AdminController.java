@@ -67,11 +67,11 @@ public class AdminController {
     public String getPatientInfoEdit(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
         Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
         Optional<PatientContact> patientContact = patientContactRepository.findById(Long.parseLong(patientId));
-        Patient updatedPatient = new Patient();
+        PatientInfo updatedPatientInfo = new PatientInfo();
         if (patient.isPresent()) {
             model.addAttribute("patient", patient.get());
             model.addAttribute("patientContact", patientContact.get());
-            model.addAttribute("updatedPatient", updatedPatient);
+            model.addAttribute("updatedPatientInfo", updatedPatientInfo);
 
             return "admin-patientInfo-edit";
         }
@@ -80,17 +80,29 @@ public class AdminController {
     }
 
     @PostMapping(path="/admin-patientInfo-update")
-    public String updatePatientInfo(@RequestParam(value="saveButton") Long patientId, @ModelAttribute("updatedPatient") Patient updatedPatient) {
+    public String updatePatientInfo(@RequestParam(value="saveButton") Long patientId, @ModelAttribute("updatedPatient") PatientInfo updatedPatientInfo) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(
                 () -> new IllegalArgumentException("Invalid Patient ID:" + patientId)
         );
+        PatientContact patientContact = patientContactRepository.findById(patientId).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Patient ID:" + patientId)
+        );
 
-        patient.setPatientFirstName(updatedPatient.getPatientFirstName());
-        patient.setPatientLastName(updatedPatient.getPatientLastName());
-        patient.setPatientDOB(updatedPatient.getPatientDOB());
-        patient.setPatientGender(updatedPatient.getPatientGender());
+        patient.setPatientFirstName(updatedPatientInfo.getPatientFirstName());
+        patient.setPatientLastName(updatedPatientInfo.getPatientLastName());
+        patient.setPatientDOB(updatedPatientInfo.getPatientDOB());
+        patient.setPatientGender(updatedPatientInfo.getPatientGender());
+
+        patientContact.setAddress(updatedPatientInfo.getAddress());
+        patientContact.setCity(updatedPatientInfo.getCity());
+        patientContact.setEmail(updatedPatientInfo.getEmail());
+        patientContact.setPhonenumber(updatedPatientInfo.getPhonenumber());
+        patientContact.setState(updatedPatientInfo.getState());
+        patientContact.setZipcode(updatedPatientInfo.getZipcode());
 
         patientRepository.save(patient);
+        patientContactRepository.save(patientContact);
+
         return "redirect:/admin-patientInfo?patientId=" + patient.getPatientId();
     }
 
