@@ -59,6 +59,9 @@ public class PatientController {
             List<Appointment> appts = appoinmentRepository.findAllByPatient(patient.get());
             model.addAttribute("patient", patient.get());
             model.addAttribute("appts", appts);
+            NewAppointment newAppointment = new NewAppointment();
+            newAppointment.setPatientId(patientId);
+            model.addAttribute("newAppointment", newAppointment);
             return "new-appointment";
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Unable to schedule new appointment");
@@ -107,12 +110,6 @@ public class PatientController {
     @GetMapping("/review-page")
     public String getReview(Model model){return "review-page";}
 
-    @PostMapping("/new-appointment")
-    public String saveNewAppointment(@ModelAttribute("appointment") Appointment appointment, BindingResult bindingResult) {
-        appoinmentRepository.save(appointment);
-        return "redirect:/patient-appointment?patientId=" + appointment.getPatient().getPatientId();
-    }
-
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {
 //        return "doctor-schedule";
@@ -127,13 +124,34 @@ public class PatientController {
         return "redirect:/patient-appointment?patientId=" + appointment.getPatient().getPatientId();
     }
 
-    @GetMapping(path="/new-appointment", params = "add")
-    public String add(@RequestParam Long id) {
-        Appointment appointment = appoinmentRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid Appointment ID:" + id)
-        );
+//    @GetMapping(path="/new-appointment", params = "add")
+//    public String add(@RequestParam Long id) {
+//        Appointment appointment = appoinmentRepository.findById(id).orElseThrow(
+//                () -> new IllegalArgumentException("Invalid Appointment ID:" + id)
+//        );
+//        appoinmentRepository.save(appointment);
+//        return "redirect:/patient-appointment" + appointment.getPatient().getPatientId();
+//    }
+
+
+    @PostMapping("/new-appointment")
+    public String saveNewAppointment(@ModelAttribute("newAppointment") NewAppointment newAppointment, BindingResult bindingResult) {
+        Appointment appointment = new Appointment();
+        Optional<Patient> patient = patientRepository.findById(Long.parseLong(newAppointment.getPatientId()));
+        if (patient.isPresent()) {
+            appointment.setPatient(patient.get());
+        }
+        Optional<Doctor> doctor = doctorRepository.findById(Long.parseLong(newAppointment.getDoctorId()));
+        if (doctor.isPresent()) {
+            appointment.setDoctor(doctor.get());
+        }
+        Optional<Location> location = locationRepository.findById(Long.parseLong(newAppointment.getLocationId()));
+        if (location.isPresent()) {
+            appointment.setLocation(location.get());
+        }
+        appointment.setAppointmentDate(newAppointment.getApptDateTime());
         appoinmentRepository.save(appointment);
-        return "redirect:/patient-appointment" + appointment.getPatient().getPatientId();
+        return "redirect:/patient-appointment?patientId="+ newAppointment.getPatientId();
     }
 
 }
