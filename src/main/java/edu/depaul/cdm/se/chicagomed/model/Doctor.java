@@ -2,6 +2,7 @@ package edu.depaul.cdm.se.chicagomed.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,7 +18,8 @@ public class Doctor implements Serializable {
 
     @Id
     @Column(name = "doctorid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GenericGenerator(name = "seq", strategy="increment")
     private long doctorId;
 
     @Column(name = "doctorfirstname")

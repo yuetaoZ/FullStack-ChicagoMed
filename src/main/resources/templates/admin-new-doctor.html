@@ -5,64 +5,45 @@
 
 <div class="admin-patientInfo-view">
     <div>
-        <h1>Patient Information</h1>
+        <h1>Doctor Information</h1>
     </div>
 
+    <script>
+        function back() {
+            var adminId = sessionStorage.getItem('adminId')
+            location.href='admin-patients?adminId=' + adminId
+        }
+    </script>
+
     <div>
-        <a type="button" class="btn btn-secondary" th:href="@{/admin-patientInfo(patientId=${patient.getPatientId()})}">Back to Patient Info</a>
+        <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient List</button>
     </div>
 
     <div class="admin-patientInfo-table">
-        <form th:action="@{/admin-patientInfo-update}" th:object="${updatedPatientInfo}" method="post">
-<!--        <form th:action="@{/admin-patientInfo-update}" method="post">-->
-        <table class="table table-striped table-bordered" style="text-align:left">
-            <thead>
+        <form th:action="@{/admin-new-doctorInfo-save(adminId=${admin.getAdminId()})}" th:object="${doctorInfo}" method="post">
+            <table class="table table-striped table-bordered" style="text-align:left">
+                <thead>
                 <tr>
-                    <th>Patient ID:  <span th:text="${patient.getPatientId()}"></span></th>
-                    <th><button type="submit"  class="btn btn-success" name="saveButton" th:value="${patient.getPatientId()}">Save</button></th>
-<!--                    <th><a class="btn btn-success" th:href="@{/admin-patientInfo-update(id=${patient.getPatientId()}, updatedPatient = ${updatedPatient})}"> Save </a></th>-->
+                    <th>New Doctor</th>
+                    <th><button type="submit"  class="btn btn-success">Save</button></th>
                 </tr>
-            </thead>
+                </thead>
 
-            <tr>
-                <td>First Name: <input type="text" name="patientFirstName" th:value="${patient.getPatientFirstName()}"> </td>
-                <td>Last Name: <input type="text" name="patientLastName" th:value="${patient.getPatientLastName()}"> </td>
-            </tr>
+                <tr>
+                    <td>First Name: <input type="text" name="doctorFirstName" th:field="*{doctorFirstName}" required> </td>
+                    <td>Last Name: <input type="text" name="doctorLastName" th:field="*{doctorLastName}" required> </td>
+                </tr>
 
-            <tr>
-                <td>DOB: <input type="date" name="patientDOB" th:value="${patient.getPatientDOB()}"> </td>
-                <td>Gender: <input type="text" name="patientGender" th:value="${patient.getPatientGender()}"> </td>
-            </tr>
+                <tr>
+                    <td colspan="2"><b>Contact Information:</b></td>
+                </tr>
 
-            <tr>
-                <td colspan="2"><b>Contact Information:</b></td>
-            </tr>
+                <tr>
+                    <td>Email: <input type="email" name="doctorEmail" th:field="*{doctorEmail}" required> </td>
+                    <td>Phone: <input type="text" name="doctorPhone" th:field="*{doctorPhone}" required> </td>
+                </tr>
 
-            <tr>
-                <td>Email: <input type="email" name="email" th:value="${patientContact.getEmail()}"> </td>
-                <td>Phone: <input type="text" name="phonenumber" th:value="${patientContact.getPhonenumber()}"> </td>
-            </tr>
-
-            <tr>
-                <td>Address: <input type="text" name="address" th:value="${patientContact.getAddress()}"> </td>
-                <td>City: <input type="text" name="city" th:value="${patientContact.getCity()}"> </td>
-            </tr>
-
-            <tr>
-                <td>State: <input type="text" name="state" th:value="${patientContact.getState()}"> </td>
-                <td>Zipcode: <input type="text" name="zipcode" th:value="${patientContact.getZipcode()}"> </td>
-            </tr>
-
-            <tr>
-                <td>Appointments History:</td>
-                <td><a class="btn btn-primary" th:href="@{/admin-patient-appointments-history(patientId=${patient.getPatientId()})}"> View </a></td>
-            </tr>
-
-            <tr>
-                <td>Upcoming Appointments:</td>
-                <td><a class="btn btn-primary" th:href="@{/admin-patient-upcoming-appointments(patientId=${patient.getPatientId()})}"> View </a></td>
-            </tr>
-        </table>
+            </table>
         </form>
     </div>
 </div>

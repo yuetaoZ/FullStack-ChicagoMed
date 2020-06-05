@@ -25,13 +25,13 @@
             </thead>
 
             <tr>
-                <td>First Name: <input type="text" name="patientFirstName" th:value="${patient.getPatientFirstName()}"> </td>
-                <td>Last Name: <input type="text" name="patientLastName" th:value="${patient.getPatientLastName()}"> </td>
+                <td>First Name: <input type="text" name="patientFirstName" th:value="${patient.getPatientFirstName()}" required> </td>
+                <td>Last Name: <input type="text" name="patientLastName" th:value="${patient.getPatientLastName()}" required> </td>
             </tr>
 
             <tr>
-                <td>DOB: <input type="date" name="patientDOB" th:value="${patient.getPatientDOB()}"> </td>
-                <td>Gender: <input type="text" name="patientGender" th:value="${patient.getPatientGender()}"> </td>
+                <td>DOB: <input type="date" name="patientDOB" th:value="${patient.getPatientDOB()}" required> </td>
+                <td>Gender: <input type="text" name="patientGender" th:value="${patient.getPatientGender()}" required> </td>
             </tr>
 
             <tr>
@@ -39,18 +39,18 @@
             </tr>
 
             <tr>
-                <td>Email: <input type="email" name="email" th:value="${patientContact.getEmail()}"> </td>
-                <td>Phone: <input type="text" name="phonenumber" th:value="${patientContact.getPhonenumber()}"> </td>
+                <td>Email: <input type="email" name="email" th:value="${patientContact.getEmail()}" required> </td>
+                <td>Phone: <input type="text" name="phonenumber" th:value="${patientContact.getPhonenumber()}" required> </td>
             </tr>
 
             <tr>
-                <td>Address: <input type="text" name="address" th:value="${patientContact.getAddress()}"> </td>
-                <td>City: <input type="text" name="city" th:value="${patientContact.getCity()}"> </td>
+                <td>Address: <input type="text" name="address" th:value="${patientContact.getAddress()}" required> </td>
+                <td>City: <input type="text" name="city" th:value="${patientContact.getCity()}" required> </td>
             </tr>
 
             <tr>
-                <td>State: <input type="text" name="state" th:value="${patientContact.getState()}"> </td>
-                <td>Zipcode: <input type="text" name="zipcode" th:value="${patientContact.getZipcode()}"> </td>
+                <td>State: <input type="text" name="state" th:value="${patientContact.getState()}" required> </td>
+                <td>Zipcode: <input type="number" name="zipcode" th:value="${patientContact.getZipcode()}" required> </td>
             </tr>
 
             <tr>
