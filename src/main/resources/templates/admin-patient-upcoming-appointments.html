@@ -41,7 +41,7 @@
                 </td>
                 <td span th:text="${appointment.getAppointmentDate()}"></td>
                 <td>
-                    <button type="submit"  class="btn btn-danger">Cancel</button>
+                    <a class="btn btn-danger" th:href="@{/admin-cancel-appointment(id=${appointment.getAppointmentId()}, delete)}"> Cancel </a>
                 </td>
             </tr>
             </tbody>

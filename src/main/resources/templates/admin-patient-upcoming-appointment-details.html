@@ -29,7 +29,7 @@
             <tr>
                 <td span th:text="${patient.getPatientId()}"></td>
                 <td th:text="${patient.getPatientFirstName().concat(' ' + patient.getPatientLastName())}"></td>
-                <td span th:text="${patient.getPatientDOB()}"></td>
+                <td span th:text="${patient.getPatientDOB().toString().substring(0,10)}"></td>
                 <td span th:text="${patient.getPatientGender()}"></td>
             </tr>
         </table>
@@ -80,7 +80,7 @@
             </thead>
 
             <tr>
-                <td>Some Notes...</td>
+                <td>Some Notes from Doctor...</td>
             </tr>
         </table>
     </div>
