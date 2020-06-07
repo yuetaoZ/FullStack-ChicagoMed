@@ -3,7 +3,8 @@ package edu.depaul.cdm.se.chicagomed.repository;
 import edu.depaul.cdm.se.chicagomed.model.Doctor;
 import edu.depaul.cdm.se.chicagomed.model.DoctorContact;
 import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
 public interface DoctorContactRepository extends CrudRepository<DoctorContact, Long> {
-//    Doctor findByDoctor(Doctor doc);
+    List<DoctorContact> findByDoctor(Doctor doc);
 }

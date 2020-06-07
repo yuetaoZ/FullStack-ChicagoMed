@@ -14,22 +14,19 @@
         <div class="pic_review">
             <img src="images/placeholder.jpg" height="270" width="300"/>
             <div id="score">
-                <h3 style="display: inline; padding: 20px">Location</h3>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                <h3 style="display: inline; padding: 20px"><span th:text="${location.locationName}"></span></h3>
             </div>
         </div>
 
         <div class="contactInfo">
-            <h2>Contact: </h2>
-            <ul>
-                <li><h4>123 E. Willow st Concord, IL 70017</h4></li>
-                <li><h4>(555)-555-555</h4></li>
-                <li><h4>aHospital@hospital.com</h4></li>
-            </ul>
+            <h2><span th:text="${location.address}"></span></h2>
+            <h2><span th:text="${location.city}, ${location.state} ${location.zipcode}"></span></h2>
+<!--            <h2>Contact: </h2>-->
+<!--            <ul>-->
+<!--                <li><h4>123 E. Willow st Concord, IL 70017</h4></li>-->
+<!--                <li><h4>(555)-555-555</h4></li>-->
+<!--                <li><h4>aHospital@hospital.com</h4></li>-->
+<!--            </ul>-->
         </div>
 
     </div>
@@ -42,23 +39,29 @@
 
 
         <div id="box">
-            <div id="container">
-                <h3>The people here are very nice.</h3>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-            </div>
+            <table>
+                <tbody>
+                <tr th:text="${reviews.locationReview}">
+                </tr>
+                </tbody>
+            </table>
+<!--            <div id="container">-->
+<!--                <h3>The people here are very nice.</h3>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star"></span>-->
+<!--            </div>-->
 
-            <div id="container">
-                <h3>This hospital is really dirty!</h3>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
+<!--            <div id="container">-->
+<!--                <h3>This hospital is really dirty!</h3>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star checked"></span>-->
+<!--                <span class="fa fa-star"></span>-->
+<!--                <span class="fa fa-star"></span>-->
+<!--                <span class="fa fa-star"></span>-->
+<!--            </div>-->
 
         </div>
 

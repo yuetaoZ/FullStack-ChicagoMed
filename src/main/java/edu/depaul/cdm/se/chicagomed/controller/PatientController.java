@@ -35,7 +35,15 @@ public class PatientController {
     @Autowired
     private DoctorContactRepository doctorContactRepository;
     @Autowired
+    private DoctorReviewRepository doctorReviewRepository;
+    @Autowired
+    private LocationDocRepository locationDocRepository;
+    @Autowired
+    private DoctorSpecializationRepository doctorSpecializationRepository;
+    @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private LocationReviewRepository locationReviewRepository;
 
 
     @GetMapping("/patient-appointment")
@@ -68,44 +76,66 @@ public class PatientController {
     }
 
     @GetMapping("/location-view")
-    public String getLocationview(Model model){return "location-view";}
+    public String getLocationview(@RequestParam(name = "locationId", required = false, defaultValue = "none")String locationId,@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model){
+        long locId = Long.parseLong(locationId);
+        Optional<Location> location = locationRepository.findById(locId);
+        long patId = Long.parseLong(patientId);
+        Optional<Patient> patient = patientRepository.findById(patId);
+        if (location.isPresent()){
+            Optional<LocationReview> reviews = locationReviewRepository.findById(locationId);
+            model.addAttribute("location",location.get());
+            model.addAttribute("patient",patient.get());
+            model.addAttribute("reviews",reviews.orElseGet(() -> new LocationReview(locationId,"No Reviews")));
+            return "location-view";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Location not found!");
+    }
 
     @GetMapping("/list-locations")
-    public String getListLocations(Model model){
-        Iterable<Location> locs = locationRepository.findAll();
-        model.addAttribute("locs",locs);
-        return "list-locations";
+    public String getListLocations(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model){
+        long patId = Long.parseLong(patientId);
+        Optional<Patient> patient = patientRepository.findById(patId);
+        if (patient.isPresent()){
+            model.addAttribute("patient",patient.get());
+            Iterable<Location> locs = locationRepository.findAll();
+            model.addAttribute("locs",locs);
+            return "list-locations";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Locations not found!");
     }
 
     @GetMapping("/list-doctors")
-    public String getListDoctors(Model model){
-        Iterable<Doctor> docs = doctorRepository.findAll();
-        model.addAttribute("docs",docs);
-        return "list-doctors";
+    public String getListDoctors(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId,Model model){
+       long patId = Long.parseLong(patientId);
+       Optional<Patient> patient = patientRepository.findById(patId);
+       if (patient.isPresent()){
+           Iterable<Doctor> docs = doctorRepository.findAll();
+           model.addAttribute("patient",patient.get());
+           model.addAttribute("docs",docs);
+           return "list-doctors";
+       }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctors not found!");
     }
-//    public String getListDoctors(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) {
-//        long docId = Long.parseLong(doctorId);
-//        Optional<Doctor> doctor = doctorRepository.findById(docId);
-//        if (doctor.isPresent()) {
-//            List<Doctor> docs = doctorRepository.findAll();
-//            model.addAttribute("docs",docs);
-//            return "list-doctors";
-//        }
-//        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctors not found!");
-//    }
 
-    @GetMapping("/doctor-View")
-    public String getDoctorView(Model model){return "doctor-view";}
-    //TODO
-//    public String getDoctorView(@RequestParam(name = "doctorId", required = false, defaultValue = "none")String doctorId,  Model model){
-//        long docId = Long.parseLong(doctorId);
-//        Optional<DoctorContact> contact = doctorContactRepository.findById(docId);
-//        if (contact.isPresent()){
-//            model.addAttribute("contact",contact);
-//            return "doctor-view";
-//        }
-//        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor not found!");
-//    }
+    @GetMapping("/doctor-view")
+    public String getDoctorView(@RequestParam(name = "doctorId", required = false, defaultValue = "none")String doctorId,@RequestParam(name = "patientId", required = false, defaultValue = "none")String patientId,  Model model){
+        long docId = Long.parseLong(doctorId);
+        Optional<Doctor> doctor = doctorRepository.findById(docId);
+        long patId = Long.parseLong(patientId);
+        Optional<Patient> patient = patientRepository.findById(patId);
+        if (doctor.isPresent()){
+            List<DoctorContact> contact = doctorContactRepository.findByDoctor(doctor.get());
+            List<DoctorSpecialization> specialization = doctorSpecializationRepository.findByDoctor(doctor.get());
+            Optional<DoctorReview> reviews = doctorReviewRepository.findById(doctorId);
+            model.addAttribute("patient",patient.get());
+            model.addAttribute("doctor",doctor.get());
+            model.addAttribute("contact",contact);
+            model.addAttribute("specialization",specialization);
+            model.addAttribute("reviews",reviews.orElseGet(() -> new DoctorReview(doctorId,"doc")));
+            return "doctor-view";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor contact not found!");
+    }
 
     @GetMapping("/review-page")
     public String getReview(Model model){return "review-page";}

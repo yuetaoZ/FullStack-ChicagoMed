@@ -27,12 +27,11 @@
                         <td colspan="2"> No Appointments Available </td>
                     </tr>
                     <tr th:each="doc : ${docs}">
+                        <td span th:text="${doc.doctorLastName}"></td>
                         <td span th:text="${doc.doctorFirstName}"></td>
-                        <td span th:text="${doc.doctorFirstName}"></td>
-                        <td span th:text="${doc.doctorId}"></td>
-                        <td><a th:href="@{/doctor-view}">View Doctor Details</a></td>
+<!--                        <td span th:text="${doc.doctorId}"></td>-->
+                        <td><a th:href="@{/doctor-view(patientId=${patient.patientId},doctorId=${doc.doctorId})}">View Doctor Details</a></td>
 
-<!--                        <a type="button" class="btn btn-secondary" th:href="@{/admin-patient-upcoming-appointments(patientId=${patient.getPatientId()})}">Back to Appointment List</a>-->
                     </tr>
                     </tr>
                     </tbody>

@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="css/viewPages.css">
+<!--        <link rel="stylesheet" href="css/viewPages.css">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -13,22 +13,24 @@
     <div class="pic_review">
         <img src="images/placeholder.jpg" height="270" width="300"/>
         <div id="score">
-            <h3 style="display: inline; padding: 20px">Dr. Jane Smith</h3>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <h3 style="display: inline; padding: 20px"><span th:text="${doctor.doctorFirstName}"></span></h3>
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star"></span>-->
+<!--            <span class="fa fa-star"></span>-->
         </div>
     </div>
 
     <div class="contactInfo">
         <h2>Contact: </h2>
-        <ul>
-            <li><h4>123 E. Willow st Concord, IL 70017</h4></li>
-            <li><h4>534 Main st West loria, IL 70787</h4></li>
-            <li><h4>(888)-888-8888</h4></li>
-            <li><h4>JSmith@hospital.com</h4></li>
+        <ul th:each="cont : ${contact}">
+            <li><span th:text="${cont.doctoremail}"></span></li>
+            <li><span th:text="${cont.doctorphonenumber}"></span></li>
+<!--            <li><h4>123 E. Willow st Concord, IL 70017</h4></li>-->
+<!--            <li><h4>534 Main st West loria, IL 70787</h4></li>-->
+<!--            <li><h4>(888)-888-8888</h4></li>-->
+<!--            <li><h4>JSmith@hospital.com</h4></li>-->
         </ul>
     </div>
 
@@ -42,23 +44,31 @@
 
 
     <div id="box">
-        <div id="container">
-            <h3>Dr. Jane is a very nice person</h3>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-        </div>
+        <table class="table table-striped table-bordered">
+            <tbody>
+<!--            <tr th:if="${reviews.empty}">No Reviews</tr>-->
+<!--            <tr th:each="review : ${reviews}">-->
+                <td span th:text="${reviews.DoctorReview}"></td>
+<!--            </tr>-->
+            </tbody>
+        </table>
+<!--        <div id="container">-->
+<!--            <h3>Dr. Jane is a very nice person</h3>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star"></span>-->
+<!--        </div>-->
 
-        <div id="container">
-            <h3>Dr. Jane called me a loser!</h3>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-        </div>
+<!--        <div id="container">-->
+<!--            <h3>Dr. Jane called me a loser!</h3>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star checked"></span>-->
+<!--            <span class="fa fa-star"></span>-->
+<!--            <span class="fa fa-star"></span>-->
+<!--            <span class="fa fa-star"></span>-->
+<!--        </div>-->
 
     </div>
 

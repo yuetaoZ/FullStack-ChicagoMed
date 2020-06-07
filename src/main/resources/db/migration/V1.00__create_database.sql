@@ -64,7 +64,7 @@ CREATE TABLE doctor(
 CREATE TABLE doctorcontact(
     doctorid int PRIMARY KEY,
     doctoremail varchar(255),
-    doctorphone varchar(255)
+    doctorphonenumber varchar(255)
 );
 
 CREATE TABLE doctorspecialization(

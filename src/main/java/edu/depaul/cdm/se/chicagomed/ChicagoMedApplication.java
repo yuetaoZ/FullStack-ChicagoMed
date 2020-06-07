@@ -1,8 +1,12 @@
 package edu.depaul.cdm.se.chicagomed;
 
 
+import edu.depaul.cdm.se.chicagomed.model.DoctorReview;
+import edu.depaul.cdm.se.chicagomed.repository.DoctorReviewRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class ChicagoMedApplication {
@@ -60,14 +64,18 @@ public class ChicagoMedApplication {
 //		};
 //	}
 //
-//	@Bean
-//	public CommandLineRunner Chicago(DoctorReviewRepository doctorReviewRepository) {
-//		return (args) -> {
-//			String doctorId;
-//			DoctorReview doc = new DoctorReview(doctorId ="1023000","Dr. Johnson is a good doctor");
-//			doctorReviewRepository.save(doc);
-//		};
-//	}
+	@Bean
+	public CommandLineRunner Chicago(DoctorReviewRepository doctorReviewRepository) {
+		return (args) -> {
+			String doctorId;
+			DoctorReview doc1 = new DoctorReview(doctorId ="1","Dr. Johnson is a good doctor");
+            DoctorReview doc2 = new DoctorReview(doctorId ="2","Dr. Johnson is a good doctor");
+            DoctorReview doc3 = new DoctorReview(doctorId ="3","Dr. Johnson is a good doctor");
+			doctorReviewRepository.save(doc1);
+            doctorReviewRepository.save(doc2);
+            doctorReviewRepository.save(doc3);
+		};
+	}
 //
 //	@Bean
 //	public CommandLineRunner ApptNotesDemo(ApptNotesRepository apptNotesRepo) {
