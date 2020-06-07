@@ -27,7 +27,7 @@ public class DoctorContact {
     @Column(name = "doctoremail")
     private String doctoremail;
 
-    @Column(name = "doctorphone")
+    @Column(name = "doctorphonenumber")
     private String doctorphonenumber;
 
 }

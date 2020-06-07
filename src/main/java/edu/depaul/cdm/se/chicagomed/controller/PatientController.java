@@ -131,14 +131,29 @@ public class PatientController {
             model.addAttribute("doctor",doctor.get());
             model.addAttribute("contact",contact);
             model.addAttribute("specialization",specialization);
-            model.addAttribute("reviews",reviews.orElseGet(() -> new DoctorReview(doctorId,"doc")));
+            model.addAttribute("reviews",reviews.orElseGet(() -> new DoctorReview(doctorId,"No Reviews")));
             return "doctor-view";
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor contact not found!");
     }
 
     @GetMapping("/review-page")
-    public String getReview(Model model){return "review-page";}
+    public String getReview(@RequestParam(name = "doctorId", required = false, defaultValue = "none")String doctorId,@RequestParam(name = "patientId", required = false, defaultValue = "none")String patientId,  Model model){
+        long docId = Long.parseLong(doctorId);
+        Optional<Doctor> doctor = doctorRepository.findById(docId);
+        long patId = Long.parseLong(patientId);
+        Optional<Patient> patient = patientRepository.findById(patId);
+        if (doctor.isPresent()){
+            model.addAttribute("doctor",doctor.get());
+            model.addAttribute("patient",patient.get());
+            return "review-page";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor contact not found!");
+    }
+//    @PostMapping("/review-page")
+//    public String saveDoctorReview(@ModelAttribute("doctorReview") DoctorReview doctorReview, BindingResult bindingResult){
+//        DoctorReview
+//    }
 
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {

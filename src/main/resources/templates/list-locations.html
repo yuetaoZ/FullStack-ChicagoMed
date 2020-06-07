@@ -34,7 +34,7 @@
                     <td span th:text="${loc.city}"></td>
                     <td span th:text="${loc.state}"></td>
                     <td span th:text="${loc.zipcode}"></td>
-                    <td><a th:href="@{/location-view(patientId=${patient.patientId})}">View Doctor Details</a></td>
+                    <td><a th:href="@{/location-view(patientId=${patient.patientId},locationId=${loc.locationid})}">View Location Reviews</a></td>
 
                 </tr>
                 </tr>
