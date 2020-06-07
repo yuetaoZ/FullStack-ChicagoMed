@@ -60,6 +60,16 @@
                 display: table;
             }
         </style>
+        <script>
+            function createNewPatient() {
+                var adminId = sessionStorage.getItem('adminId')
+                location.href='admin-new-patient?adminId=' + adminId
+            }
+            function createNewDoctor() {
+                var adminId = sessionStorage.getItem('adminId')
+                location.href='admin-new-doctor?adminId=' + adminId
+            }
+        </script>
     </head>
     <body>
         <div th:fragment="header" class="header">
@@ -72,7 +82,8 @@
                         <h2>Chicago Med Application</h2>
                     </div>
                     <div style="width:33%; text-align: center;">
-                        <h2>Admin Portal</h2>
+                            <p><button class="btn btn-success" onclick="createNewPatient()">Create a New Patient</button></p>
+                            <p><button class="btn btn-success" onclick="createNewDoctor()">Create a New Doctor </button></p>
                     </div>
                 </div>
             </nav>
