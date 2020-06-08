@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <head th:replace="fragments/patient-header :: common-header">
+
     </head>
 
 <body>
@@ -9,15 +10,26 @@
     <div class = "container">
     <div id="doctor-patient-view-label">
         <h1>Schedule a New Appointment!</h1>
+        <script>
+            function back() {
+                var patientId = sessionStorage.getItem('patientId')
+                location.href='patient-appointment?patientId=' + patientId
+            }
+        </script>
+
+        <div>
+            <button type="button" class="btn btn-secondary" onclick="back()">Back to Patient Appointments</button>
+        </div>
     </div>
     <br/>
     <br/>
         <form action="#" th:action="@{/new-appointment}" th:object="${newAppointment}" method="post">
             <div class="row form-group">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" th:field="${newAppointment.patientId}" placeholder="Patient" hidden="true"/>
+                <div>
+                    <input type="" class="form-control" th:field="${newAppointment.patientId}" placeholder="Patient" hidden="true"/>
                 </div>
-                <div class="col-lg-6">
+                <div>
+                    <label><h2>Select a Location</h2></label>
                     <input type="text" class="form-control" th:field="${newAppointment.locationId}" placeholder="Location"/>
                         <br/>
                         Enter 1 for Northwestern Hospital
@@ -26,27 +38,33 @@
                         <br/>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Appointment Type</label>
-                    <input type="text" class="form-control" th:field="${newAppointment.doctorId}" placeholder="Doctor">-->
-                        <br/>-->
-                        Enter 1 for Dr. Jordan-->
-                        <br/>-->
-                        Enter 2 for  Dr. Seinfeld-->
-                        <br/>-->
+                <div>
+                    <label><h2>Appointment Type</h2></label>
+                    <input type="text" class="form-control" th:field="${newAppointment.doctorId}" placeholder="Doctor">
+                        <br/>
+                        Enter 1 for Dr. Jordan
+                        <br/>
+                        Enter 2 for  Dr. Seinfeld
+                        <br/>
                         Enter 3 for Dr. Skywalker
                         <br/>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Appointment Date and Time</label>
+                <div>
+                    <label><h2>Select Your Appointment Date and Time</h2></label>
                      <br/>
                     <input type="datetime-local" class="form-control" th:field="*{apptDateTime}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary" name="submitbutton">Submit</button>
+            <br/>
+            <br/>
+            <button type="submit" class="btn btn-lg btn-primary" name="submitbutton">Schedule Appointment</button>
         </form>
 </body>
 
