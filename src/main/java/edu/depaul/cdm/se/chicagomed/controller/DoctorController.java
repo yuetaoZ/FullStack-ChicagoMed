@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se.chicagomed.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -79,62 +80,25 @@ public class DoctorController {
     }
 
     @GetMapping("/doctor-schedule")
-    public String getDoctorSchedule(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) {
-        doctorScheduleRepository.deleteAll();
+    public String getDoctorSchedule(@RequestParam(name = "doctorId", required = false, defaultValue = "none") String doctorId, Model model) throws Exception {
         Optional<Doctor> doctor = doctorRepository.findById(Long.parseLong(doctorId));
         model.addAttribute("doctor", doctor.get());
         Optional<DoctorSchedule> doctorSchedule = doctorScheduleRepository.findById(doctor.get().getDoctorId());
         if (doctorSchedule.isPresent()) {
-            DoctorSchedule schedule = doctorSchedule.get();
-            model.addAttribute("doctorSchedule", schedule);
+            model.addAttribute("docSchedule", doctorSchedule.get());
         } else {
             DoctorSchedule newSchedule = new DoctorSchedule();
             newSchedule.setDoctorId(Long.parseLong(doctorId));
-            newSchedule.setSchedule(getDefaultSchedule());
-            model.addAttribute("doctorSchedule", newSchedule);
+            newSchedule.setSchedule(WeekSchedule.getDefaultSchedule());
+            model.addAttribute("docSchedule", newSchedule);
         }
         return "doctor-schedule";
     }
 
     @PostMapping("/doctor-schedule")
-    public String saveDoctorSchedule(@ModelAttribute("doctorSchedule") DoctorSchedule doctorSchedule, BindingResult bindingResult) {
-        return "";
-    }
-
-    private Map<String, DaySchedule> getDefaultSchedule() {
-        Map<String, DaySchedule> scheduleMap = new HashMap<>();
-        DaySchedule monday = new DaySchedule();
-        monday.setDay("Monday");
-        monday.setStartTime("8am");
-        monday.setEndTime("5pm");
-
-        DaySchedule tuesday = new DaySchedule();
-        tuesday.setDay("Tuesday");
-        tuesday.setStartTime("8am");
-        tuesday.setEndTime("5pm");
-
-        DaySchedule wednesday = new DaySchedule();
-        wednesday.setDay("Wednesday");
-        wednesday.setStartTime("8am");
-        wednesday.setEndTime("5pm");
-
-        DaySchedule thursday = new DaySchedule();
-        thursday.setDay("Thursday");
-        thursday.setStartTime("8am");
-        thursday.setEndTime("5pm");
-
-        DaySchedule friday = new DaySchedule();
-        friday.setDay("Friday");
-        friday.setStartTime("8am");
-        friday.setEndTime("5pm");
-
-        scheduleMap.put(monday.getDay(), monday);
-        scheduleMap.put(tuesday.getDay(), tuesday);
-        scheduleMap.put(wednesday.getDay(), wednesday);
-        scheduleMap.put(thursday.getDay(), thursday);
-        scheduleMap.put(friday.getDay(), friday);
-
-        return scheduleMap;
+    public String saveDoctorSchedule(@ModelAttribute("docSchedule") DoctorSchedule doctorSchedule, BindingResult bindingResult) {
+        doctorScheduleRepository.save(doctorSchedule);
+        return "redirect:/doctor-schedule?doctorId=" + doctorSchedule.getDoctorId();
     }
 
 

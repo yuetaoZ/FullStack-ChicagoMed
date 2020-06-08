@@ -13,32 +13,74 @@
         <h1>Editing weekly schedule for Dr. <span th:text="${doctor.getDoctorLastName()}"></span></h1>
 
     </div>
+    <form action="#" th:action="@{/doctor-schedule}" th:object="${docSchedule}" method="post">
 
-<!--    <input type="text" class="form-control" th:field="*{doctorSchedule.doctorId}" placeholder="id" hidden="true"/>-->
-    <div class="doctor-schedule-table">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                </thead>
-                <tbody id="tableBody">
-                <tr th:each="day : ${doctorSchedule.schedule.values()}">
-                    <td span th:text="${day.day}"></td>
-                    <td span th:text="${day.startTime}"></td>
-                    <td span th:text="${day.endTime}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <input type="text" class="form-control" th:field="${docSchedule.doctorId}" placeholder="id" hidden="true"/>
+        <div class="doctor-schedule-table">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    <tr>
+                        <td span th:text="${docSchedule.schedule.monday.day}"></td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.monday.startTime}"/>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.monday.endTime}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td span th:text="${docSchedule.schedule.tuesday.day}"></td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.tuesday.startTime}"/>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.tuesday.endTime}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td span th:text="${docSchedule.schedule.wednesday.day}"></td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.wednesday.startTime}"/>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.wednesday.endTime}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td span th:text="${docSchedule.schedule.thursday.day}"></td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.thursday.startTime}"/>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.thursday.endTime}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td span th:text="${docSchedule.schedule.friday.day}"></td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.friday.startTime}"/>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" th:field="${docSchedule.schedule.friday.endTime}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <div>
-        <button type="button" class="btn btn-primary">Save</button>
-    </div>
+        <div>
+            <button type="submit"  class="btn btn-primary">Save</button>
+        </div>
+    </form>
 </div>
 <script>
     var days = [
@@ -59,7 +101,7 @@
         "                            <option value=\"15\">3pm</option>\n" +
         "                            <option value=\"16\">4pm</option>\n" +
         "                            <option value=\"17\">5pm</option>\n" +
-            "<hr>" +
+        "<hr>" +
         "                            <option value=\"0\">OFF</option>\n" +
         "                        </select>";
     var endHours = "                <select>\n" +
@@ -84,7 +126,7 @@
             "                    <td>" + day + "</td>\n" +
             "                    <td>" + startHours + "</td>\n" +
             "                    <td>" + endHours + "</td>\n"
-            "                </tr>"
+        "                </tr>"
     })
 
 
