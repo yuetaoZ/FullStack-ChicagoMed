@@ -10,6 +10,7 @@ public class LocationReview {
     @Id
     public String locationId;
     public String locationReview;
+    public String patientId;
 
     public LocationReview(String locationId, String review) {
         this.locationId = locationId;

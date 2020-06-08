@@ -2,7 +2,9 @@ package edu.depaul.cdm.se.chicagomed;
 
 
 import edu.depaul.cdm.se.chicagomed.model.DoctorReview;
+import edu.depaul.cdm.se.chicagomed.model.LocationReview;
 import edu.depaul.cdm.se.chicagomed.repository.DoctorReviewRepository;
+import edu.depaul.cdm.se.chicagomed.repository.LocationReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -74,6 +76,17 @@ public class ChicagoMedApplication {
 			doctorReviewRepository.save(doc1);
             doctorReviewRepository.save(doc2);
             doctorReviewRepository.save(doc3);
+		};
+	}
+
+	@Bean
+	public CommandLineRunner locationReviewData(LocationReviewRepository locationReviewRepository) {
+		return (args) -> {
+			String locationId;
+			LocationReview loc1 = new LocationReview(locationId ="1","Northwestern Hospital is super big!");
+			LocationReview loc2 = new LocationReview(locationId ="2","Chicago Primary Care has nice people.");
+			locationReviewRepository.save(loc1);
+			locationReviewRepository.save(loc2);
 		};
 	}
 //

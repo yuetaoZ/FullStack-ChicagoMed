@@ -82,10 +82,10 @@ public class PatientController {
         long patId = Long.parseLong(patientId);
         Optional<Patient> patient = patientRepository.findById(patId);
         if (location.isPresent()){
-            Optional<LocationReview> reviews = locationReviewRepository.findById(locationId);
+//            Optional<LocationReview> reviews = locationReviewRepository.findById(locationId);
             model.addAttribute("location",location.get());
             model.addAttribute("patient",patient.get());
-            model.addAttribute("reviews",reviews.orElseGet(() -> new LocationReview(locationId,"No Reviews")));
+//            model.addAttribute("reviews",reviews.orElseGet(() -> new LocationReview(locationId,"No Reviews")));
             return "location-view";
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Location not found!");
@@ -151,15 +151,38 @@ public class PatientController {
             model.addAttribute("doctorReview", doctorReview);
             return "review-page";
         }
-        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor contact not found!");
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor reviews not found!");
+    }
+
+    @GetMapping("/review-page-location")
+    public String getLocationReview(@RequestParam(name = "locationId", required = false, defaultValue = "none")String locationId,@RequestParam(name = "patientId", required = false, defaultValue = "none")String patientId,  Model model){
+        long locId = Long.parseLong(locationId);
+        Optional<Location> location = locationRepository.findById(locId);
+        long patId = Long.parseLong(patientId);
+        Optional<Patient> patient = patientRepository.findById(patId);
+        LocationReview locationReview = new LocationReview(locationId, "");
+        locationReview.setPatientId(patientId);
+        if (location.isPresent()){
+            model.addAttribute("location",location.get());
+            model.addAttribute("patient",patient.get());
+            model.addAttribute("locationReview", locationReview);
+            return "review-page-location";
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Location reviews not found!");
+    }
+
+    @PostMapping("/locationReview-page")
+    public String saveLocationReview(@ModelAttribute("locationReview") LocationReview locationReview, BindingResult bindingResult){
+        locationReviewRepository.save(locationReview);
+        return "redirect:/list-locations?patientId=" + locationReview.getPatientId();
     }
 
     @PostMapping("/doctorReview-page")
     public String saveDoctorReview(@ModelAttribute("doctorReview") DoctorReview doctorReview, BindingResult bindingResult){
-//        long patId = Long.parseLong(patientId);
         doctorReviewRepository.save(doctorReview);
         return "redirect:/list-doctors?patientId=" + doctorReview.getPatientId();
     }
+
 
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {
