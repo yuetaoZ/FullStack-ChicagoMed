@@ -10,6 +10,7 @@ public class DoctorReview {
     @Id
     public String DoctorId;
     public String DoctorReview;
+    public String patientId;
 
     public DoctorReview(String doctorId, String doctorReview) {
         DoctorId = doctorId;

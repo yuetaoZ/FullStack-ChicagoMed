@@ -17,12 +17,18 @@
         </div>
     </div>
 
-    <div class="review">
-        <textarea id="comment" type="text"></textarea>
-        <br>
-        <button id="submit" type="submit">Submit</button>
 
-    </div>
+    <form action="#" th:action="@{/doctorReview-page}" th:object="${doctorReview}" method="post">
+        <div style="width:45%; height: 33%; margin: auto; padding: 40px;">
+            <h2>Leave your review:</h2>
+            <input type="text" class="form-control" th:field="*{doctorId}" placeholder="doctorId" hidden="true"/>
+            <input type="text" class="form-control" th:field="*{patientId}" placeholder="patientId" hidden="true"/>
+            <textarea th:field="*{doctorReview}" rows="15" cols="100"></textarea>
+        </div>
+        <div>
+            <button type="submit"  class="btn btn-primary">Save</button>
+        </div>
+    </form>
 
 
 </body>

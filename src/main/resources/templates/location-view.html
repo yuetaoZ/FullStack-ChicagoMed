@@ -5,16 +5,17 @@
 </head>
 
 <body>
+
     <div th:replace="fragments/patient-header :: header"></div>
 
     <div class="top">
         <div class="pic_review">
-            <img src="images/placeholder.jpg" height="270" width="300"/>
+<!--            <img src="images/placeholder.jpg" height="270" width="300"/>-->
             <div id="score">
                 <h2 style="display: inline; padding: 20px"><span th:text="${location.locationName}"></span></h2>
             </div>
         </div>
-
+    <br>
         <div class="contactInfo">
             <h6><span th:text="${location.address}"></span>,</h6>
             <h6><span th:text="${location.city}"></span> <span th:text="${location.state}"> </span> <span th:text="${location.zipcode}"></span></h6>
@@ -40,7 +41,7 @@
             </table>
         </div>
 
-
+    </div>
 
 </body>
 </html>

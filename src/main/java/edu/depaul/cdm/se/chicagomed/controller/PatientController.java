@@ -143,17 +143,23 @@ public class PatientController {
         Optional<Doctor> doctor = doctorRepository.findById(docId);
         long patId = Long.parseLong(patientId);
         Optional<Patient> patient = patientRepository.findById(patId);
+        DoctorReview doctorReview = new DoctorReview(doctorId,"");
+        doctorReview.setPatientId(patientId);
         if (doctor.isPresent()){
             model.addAttribute("doctor",doctor.get());
             model.addAttribute("patient",patient.get());
+            model.addAttribute("doctorReview", doctorReview);
             return "review-page";
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Doctor contact not found!");
     }
-//    @PostMapping("/review-page")
-//    public String saveDoctorReview(@ModelAttribute("doctorReview") DoctorReview doctorReview, BindingResult bindingResult){
-//        DoctorReview
-//    }
+
+    @PostMapping("/doctorReview-page")
+    public String saveDoctorReview(@ModelAttribute("doctorReview") DoctorReview doctorReview, BindingResult bindingResult){
+//        long patId = Long.parseLong(patientId);
+        doctorReviewRepository.save(doctorReview);
+        return "redirect:/list-doctors?patientId=" + doctorReview.getPatientId();
+    }
 
 //    @GetMapping("/doctor-schedule")
 //    public String getDoctorSchedule(Model model) {
