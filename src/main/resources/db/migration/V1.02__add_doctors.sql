@@ -10,3 +10,9 @@ insert into doctorcontact(doctorid, doctoremail, doctorphonenumber) values (3, '
 insert into doctorspecialization(doctorid, specialization) values (1, 'Able to handle many conditions');
 insert into doctorspecialization(doctorid, specialization) values (2, 'Able to handle many conditions with jokes');
 insert into doctorspecialization(doctorid, specialization) values (3, 'Able to use the force to help');
+
+
+
+--insert into bill(appointmentid,billid,billamt,paidamt,duedate,patientid,billbalance) values (3,11,120,120,0,1,0);
+
+

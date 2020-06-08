@@ -24,16 +24,16 @@
             </thead>
 
 
-            <tr th:each="appointmentss:${Appointment}">
+            <tr th:each="appointment:${appointment}">
                 <td>Appointment ID:</td>
-                <td th:text="${Appointment.getAppointmentId()}"</td>
+                <td th:text="${appointment.getAppointmentId()}"</td>
                 <td>Patient ID:</td>
-                <td th:text="${patient.getPatientId()}"</td>
+                <td th:text="${getpatient.getPatientId()}"</td>
             </tr>
 
             <tr>
                 <td>Billing ID:</td>
-                <td colspan="3" th:text="${billing.getBillId()}" </td>
+                <td colspan="3" th:text="${getpatient.getPatientId()}" </td>
             </tr>
 
             <tr>
@@ -45,7 +45,7 @@
 
             <tr>
                 <td>Billing Balance:</td>
-                <td colspan="3" th:text="${billing.getDueDate()}" </td>
+                <td colspan="3" th:text="${billing.getBillBalance()}" </td>
             </tr>
         </table>
     </div>

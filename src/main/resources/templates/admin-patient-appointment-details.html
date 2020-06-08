@@ -12,7 +12,8 @@
     </div>
 
     <div>
-        <a href="/admin-patient-appointments-history"> <- Back to Patient's Appointment History</a>
+        <a type="button" class="btn btn-secondary" th:href="@{/admin-patient-appointments-history(patientId=${getpatient.getPatientId()})}">Back to Patient's Appointment History </a>
+
     </div>
 
     <div class="admin-patientInfo-table">
@@ -26,11 +27,12 @@
                 </tr>
             </thead>
 
-            <tr>
-                <td>001</td>
-                <td>Ada Lovelace</td>
-                <td>12/10/1815</td>
-                <td>Female</td>
+            <tr th:each="patients:${getpatient}">
+
+                <td th:text="${getpatient.getPatientId()}"</td>
+                <td th:text="${getpatient.getPatientFirstName().concat( ' '+ getpatient.getPatientLastName() ) }"</td>
+                <td th:text="${getpatient.getPatientDOB().toString().substring(0,10)}"</td>
+                <td th:text="${getpatient.getPatientGender()}"</td>
             </tr>
         </table>
 
@@ -43,22 +45,22 @@
 
             <tr>
                 <td>Appointment ID</td>
-                <td>001</td>
+                <td th:text="${appointment.getAppointmentId()}" ></td>
             </tr>
 
             <tr>
                 <td>Date:</td>
-                <td>05/30/2020</td>
+                <td th:text="${appointment.getAppointmentDate()}" ></td>
             </tr>
 
             <tr>
                 <td>Doctor:</td>
-                <td>Dr. Smith</td>
+                <td th:text="${appointment.getDoctor().getDoctorFirstName().concat(' '+ appointment.getDoctor().getDoctorLastName())}" ></td>
             </tr>
 
             <tr>
                 <td>Location:</td>
-                <td>123 E. Willow st Concord, IL 70017</td>
+                <td th:text="${appointment.getLocation().getAddress()}" ></td>
             </tr>
         </table>
 

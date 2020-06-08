@@ -1,3 +1,4 @@
+
 CREATE TABLE patient (
     patientid SERIAL,
     patientfirstname varchar (255),

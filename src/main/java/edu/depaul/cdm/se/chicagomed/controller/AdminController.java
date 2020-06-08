@@ -202,17 +202,17 @@ public class AdminController {
     public String getPatientAppointmentsHistory(@RequestParam (name = "patientId", required = false, defaultValue = "none")  String patientId , Model model) {
 
         Optional<Patient> patient = patientRepository.findById(Long.parseLong(patientId));
-
-
+     //   Optional<Appointment> appointments = appointmentRepository.findById();
+     //   Optional<Appointment>appointments = appointmentRepository.findById(patient.get().getPatientId());
         if (patient.isPresent()) {
 
             Iterable<Appointment> appts = appointmentRepository.findAllByPatient(patient.get());
 
             model.addAttribute("patient", patient.get());
-            model.addAttribute("appointments",patient.get());
+       //     model.addAttribute("appointments",appointments.get());
             model.addAttribute("appointment",appts);
 
-           return "admin-patient-appointments-history";
+            return "admin-patient-appointments-history";
         }
 
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appointment not found");
@@ -262,25 +262,38 @@ public class AdminController {
 
 
     @GetMapping("/admin-patient-appointment-details")
-    public String getPatientAppointmentDetails(Model model) {
-        return "admin-patient-appointment-details";
+    public String getPatientAppointmentDetails(@RequestParam (name = "appointmentId", required = false, defaultValue = "none")  String appointmentId , Model model) {
+
+        Optional<Appointment> appointment = appointmentRepository.findById(Long.parseLong(appointmentId));
+        Optional<Patient> patient = patientRepository.findById(appointment.get().getPatient().getPatientId());
+        Optional<Doctor> doctor = doctorRepository.findById(appointment.get().getDoctor().getDoctorId());
+        if (appointment.isPresent()) {
+            model.addAttribute("getpatient", patient.get());
+            model.addAttribute("doctor", doctor.get());
+
+            model.addAttribute("appointment", appointment.get());
+
+            return "admin-patient-appointment-details";
+        }
+
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Appointment not found");
     }
 
 
+
+
+
     @GetMapping("/admin-patient-billing-info")
-    public String getPatientBillingInfo(@RequestParam(name = "patientId", required = false, defaultValue = "none") String patientId, Model model) {
+    public String getPatientBillingInfo(@RequestParam(name = "appointmentId", required = false, defaultValue = "none") String appointmentId, Model model) {
 
-        Optional<Patient> patients = patientRepository.findById(Long.parseLong(patientId));
-        Optional<Bill> bill = billRepository.findById(Long.parseLong(patientId));
+        Optional<Appointment> appointment = appointmentRepository.findById(Long.parseLong(appointmentId));
+        Optional<Patient> patient = patientRepository.findById(appointment.get().getPatient().getPatientId());
+        Optional<Bill> bill = billRepository.findById(appointment.get().getAppointmentId());
+        if (appointment.isPresent()) {
 
 
-        if (patients.isPresent()) {
-
-            Iterable<Appointment> appts = appointmentRepository.findAllByPatient(patients.get());
-
-            model.addAttribute("patient", patients.get());
-            model.addAttribute("appointments",patients.get());
-            model.addAttribute("appointment",appts);
+            model.addAttribute("getpatient", patient.get());
+            model.addAttribute("appointment", appointment.get());
             model.addAttribute("billing",bill.get());
 
 
