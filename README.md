@@ -1,10 +1,10 @@
 # SE452-Chicago-Med
-SE 452 Group Project- Chicago Med\
-This project illustrated how frontend and backend databases connected via Maven and Lombok, as well as how CRUD and search features are implemented on websites.
+This project set up a server-side website to support doctors and clients to manage their profile and appointments. PostgreSQL is used to store data tables and MongoDB is used to store NOSQL data.\
+Technology stacks: Maven, Lombok, JSP, JDBC, PostgreSQL, MongoDB
 
-To compile and run the application, run on terminal:\
-For compile: "mvn install -Dmaven.test.skip=true"\
-For run the application: "mvn spring-boot:run"
+To compile and run the application:\
+compile: mvn install -Dmaven.test.skip=true\
+run: mvn spring-boot:run
 
 Login to test the Application:\
 Login as Admin: user = 100, password = ""\
