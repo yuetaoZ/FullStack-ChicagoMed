@@ -11,4 +11,4 @@ Login as Admin: user = 100, password = ""\
 Login as Patient: user = 12345, password = ""\
 Login as Doctor: user = 1, password = ""
 
-demo:https://youtu.be/KhdxtOKeTYo
+demo: https://youtu.be/KhdxtOKeTYo
